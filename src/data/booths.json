@@ -362,22 +362,6 @@
         "division": "Shortland"
       },
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 15,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 16.9,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -594,22 +578,6 @@
         "party": "ALP",
         "votes": 1280,
         "percentage": 47.4,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 8.5,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 17.3,
         "division": "Shortland"
       }
     ]
@@ -1647,22 +1615,6 @@
         "party": "ALP",
         "votes": 267,
         "percentage": 42.65,
-        "division": "Newcastle"
-      },
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.3,
-        "division": "Newcastle"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 13.2,
         "division": "Newcastle"
       },
       {
@@ -3832,32 +3784,32 @@
         "electionId": "2019-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
-        "votes": 32,
-        "percentage": 0,
+        "votes": 145,
+        "percentage": 7.89,
         "division": "Newcastle"
       },
       {
         "electionId": "2019-state",
         "contestName": "Legislative Assembly",
         "party": "ALP",
-        "votes": 31,
-        "percentage": 0,
+        "votes": 1069,
+        "percentage": 58.16,
         "division": "Newcastle"
       },
       {
         "electionId": "2019-state",
         "contestName": "Legislative Assembly",
         "party": "LNP",
-        "votes": 1140,
-        "percentage": 0,
+        "votes": 431,
+        "percentage": 23.45,
         "division": "Newcastle"
       },
       {
         "electionId": "2019-state",
         "contestName": "Legislative Assembly",
         "party": "OTH",
-        "votes": 2943,
-        "percentage": 0,
+        "votes": 193,
+        "percentage": 10.5,
         "division": "Newcastle"
       },
       {
@@ -6066,22 +6018,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 17.6,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14.4,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -6284,22 +6220,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14.6,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 19.2,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -6568,22 +6488,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 15.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 16.6,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -6786,22 +6690,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 20.4,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 18.6,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -7006,22 +6894,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 16.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 17.3,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -7224,22 +7096,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.1,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 16.1,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -7444,22 +7300,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 13.9,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -7654,60 +7494,6 @@
     ]
   },
   {
-    "id": "59",
-    "name": "Speers Point",
-    "suburb": "Speers Point",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 8.7,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 13,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "60",
-    "name": "Belmont West",
-    "suburb": "Belmont West",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.5,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
     "id": "61",
     "name": "Hillsborough",
     "suburb": "Hillsborough",
@@ -7716,22 +7502,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 12,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14.2,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -7927,60 +7697,6 @@
     ]
   },
   {
-    "id": "62",
-    "name": "Redhead",
-    "suburb": "Redhead",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14.2,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 14.2,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "63",
-    "name": "Gateshead",
-    "suburb": "Gateshead",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.6,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 13.5,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
     "id": "64",
     "name": "Warners Bay",
     "suburb": "Warners Bay",
@@ -7989,22 +7705,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.2,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -8177,22 +7877,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 6.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.8,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -8355,222 +8039,6 @@
     ]
   },
   {
-    "id": "66",
-    "name": "Caves Beach",
-    "suburb": "Caves Beach",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9.4,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.4,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "67",
-    "name": "Belmont Central",
-    "suburb": "Belmont Central",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9.2,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.9,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "68",
-    "name": "Nords Wharf",
-    "suburb": "Nords Wharf",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 7.1,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 12.1,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "69",
-    "name": "Belmont North",
-    "suburb": "Belmont North",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 8.2,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.7,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "70",
-    "name": "Swansea Central",
-    "suburb": "Swansea Central",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 5.6,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.7,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "71",
-    "name": "Marks Point",
-    "suburb": "Marks Point",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 7.7,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.1,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "72",
-    "name": "Blacksmiths",
-    "suburb": "Blacksmiths",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.7,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
-    "id": "73",
-    "name": "Jewells",
-    "suburb": "Jewells",
-    "division": "Shortland",
-    "lga": "Lake Macquarie City Council",
-    "lat": -33.0039,
-    "lng": 151.6508,
-    "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 8.6,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.4,
-        "division": "Shortland"
-      }
-    ]
-  },
-  {
     "id": "74",
     "name": "Floraville",
     "suburb": "Floraville",
@@ -8579,22 +8047,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 10.1,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 12.4,
-        "division": "Shortland"
-      },
       {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
@@ -8767,22 +8219,6 @@
     "lng": 151.6508,
     "results": [
       {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.8,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 11.4,
-        "division": "Shortland"
-      },
-      {
         "electionId": "2023-state",
         "contestName": "Legislative Assembly",
         "party": "GRN",
@@ -8953,22 +8389,6 @@
     "lat": -33.0039,
     "lng": 151.6508,
     "results": [
-      {
-        "electionId": "2022-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 12.4,
-        "division": "Shortland"
-      },
-      {
-        "electionId": "2025-federal",
-        "contestName": "House of Representatives",
-        "party": "GRN",
-        "votes": 0,
-        "percentage": 9.3,
-        "division": "Shortland"
-      },
       {
         "electionId": "2015-state",
         "contestName": "Legislative Assembly",

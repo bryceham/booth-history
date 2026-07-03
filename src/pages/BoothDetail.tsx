@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, MapPin, AlertCircle, TrendingUp } from 'lucide-react';
+import { ArrowLeft, AlertCircle, TrendingUp } from 'lucide-react';
 import {
   LineChart,
   Line,
@@ -59,16 +59,13 @@ export default function BoothDetail() {
         r => r.electionId === currentContest.electionId && r.contestName === currentContest.contestName
       );
 
-      const alpResult = allResultsForElectionAndContest.find(r => r.party === 'ALP');
-      const lnpResult = allResultsForElectionAndContest.find(r => r.party === 'LNP' || r.party === 'LIB' || r.party === 'NAT');
-      
-      const greensPercentage = currentContest.party === 'GRN' ? currentContest.percentage : 0;
-      
-      // Calculate Others
-      const greensPct = allResultsForElectionAndContest.find(r => r.party === 'GRN')?.percentage || 0;
-      const alpPct = alpResult?.percentage || 0;
-      const lnpPct = lnpResult?.percentage || 0;
-      const othersPct = Math.max(0, 100 - (greensPct + alpPct + lnpPct));
+      const grn = allResultsForElectionAndContest.find(r => r.party === 'GRN')?.votes || 0;
+      const alp = allResultsForElectionAndContest.find(r => r.party === 'ALP')?.votes || 0;
+      const lnp = allResultsForElectionAndContest.find(r => r.party === 'LNP')?.votes || 0;
+      const oth = allResultsForElectionAndContest.find(r => r.party === 'OTH')?.votes || 0;
+      const total = grn + alp + lnp + oth;
+
+      if (total === 0) return;
 
       return {
         electionId: currentContest.electionId,
@@ -77,12 +74,19 @@ export default function BoothDetail() {
         date: item.date,
         type: currentElection?.type || 'federal',
         division: currentContest.division || currentElection?.division || 'Unknown',
-        greens: greensPercentage,
-        alp: alpPct,
-        lnp: lnpPct,
-        others: parseFloat(othersPct.toFixed(2)),
+        booth,
+        grn,
+        grnPct: parseFloat(((grn / total) * 100).toFixed(2)),
+        alp,
+        alpPct: parseFloat(((alp / total) * 100).toFixed(2)),
+        lnp,
+        lnpPct: parseFloat(((lnp / total) * 100).toFixed(2)),
+        oth,
+        othPct: parseFloat(((oth / total) * 100).toFixed(2)),
+        total,
         rawResult: currentContest
       };
+
     });
 
     // Return in reverse chronological order (newest first) for the table view
@@ -96,10 +100,10 @@ export default function BoothDetail() {
     return [...tableData]
       .sort((a, b) => a.date.localeCompare(b.date))
       .map(row => ({
-        name: row.electionName.replace(' Election', '').replace(' NSW State', ' State'),
-        'Greens %': row.greens,
-        'ALP %': row.alp || null,
-        'LNP %': row.lnp || null,
+        name: row.division + ' - ' + row.electionName.replace(' Election', '').replace(' NSW State', ' State'),
+        'Greens %': row.grnPct,
+        'ALP %': row.alpPct || null,
+        'LNP %': row.lnpPct || null,
       }));
   }, [tableData]);
 
@@ -124,28 +128,19 @@ export default function BoothDetail() {
       </div>
 
       {/* Header Info */}
-      <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <span className="bg-greens-50 border border-greens-200 text-greens-700 text-xs px-2.5 py-1 rounded-full font-semibold font-mono">
-              Booth ID: {booth.id}
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-1">{booth.name}</h1>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
-              <span className="flex items-center gap-1">
-                <MapPin className="w-4 h-4 text-slate-400" />
-                {booth.suburb}
-              </span>
-              <span>•</span>
-              <span>LGA: {booth.lga || 'N/A'}</span>
-              <span>•</span>
-              <span>Current Division: <strong className="text-slate-800">{booth.division}</strong></span>
-            </div>
-          </div>
-          <div className="text-xs text-slate-500 font-mono self-stretch md:self-auto bg-slate-50 p-3 rounded-lg border border-slate-200">
-            <div>Latitude: {booth.lat}</div>
-            <div className="mt-1">Longitude: {booth.lng}</div>
-          </div>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 mb-1">{booth.name}</h1>
+          {/* <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
+                <span className="flex items-center gap-1">
+                  <MapPin className="w-4 h-4 text-slate-400" />
+                  {booth.suburb}
+                </span>
+                <span>•</span>
+                <span>LGA: {booth.lga || 'N/A'}</span>
+                <span>•</span>
+                <span>Current Division: <strong className="text-slate-800">{booth.division}</strong></span>
+              </div> */}
         </div>
       </div>
 
@@ -204,69 +199,47 @@ export default function BoothDetail() {
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold">
               <tr>
                 <th className="px-5 py-3">Election & Date</th>
-                <th className="px-5 py-3">Contest</th>
-                <th className="px-5 py-3 text-greens-700">Greens %</th>
-                <th className="px-5 py-3 text-red-700">ALP %</th>
-                <th className="px-5 py-3 text-blue-700">LNP %</th>
-                <th className="px-5 py-3 text-slate-700">Others %</th>
-                <th className="px-5 py-3 text-right">Type</th>
+                <th className="px-5 py-3.5 text-greens-700">Greens %</th>
+                <th className="px-5 py-3.5 text-red-750">ALP %</th>
+                <th className="px-5 py-3.5 text-blue-750">LNP %</th>
+                <th className="px-5 py-3.5 text-slate-500">Others %</th>
+                <th className="px-5 py-3.5 text-right">Total Votes</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-150">
-              {tableData.map((row, idx) => {
-                const maxPct = Math.max(row.greens, row.alp, row.lnp, row.others);
-                const isGreensWinner = row.greens === maxPct;
-                const isAlpWinner = row.alp === maxPct;
-                const isLnpWinner = row.lnp === maxPct;
-                const isOthersWinner = row.others === maxPct;
+              {tableData.map((r, idx) => {
+                const maxPct = Math.max(r.grnPct, r.alpPct, r.lnpPct, r.othPct);
+                const isGrnWinner = r.grnPct === maxPct;
+                const isAlpWinner = r.alpPct === maxPct;
+                const isLnpWinner = r.lnpPct === maxPct;
+                const isOthWinner = r.othPct === maxPct;
 
                 return (
-                  <tr key={`${row.electionId}-${row.contestName}-${idx}`} className="hover:bg-slate-50/50">
+                  <tr key={`${r.electionId}-${r.contestName}-${idx}`} className="hover:bg-slate-50/50">
                     <td className="px-5 py-4">
                       <div className="font-semibold text-slate-800">
-                        <Link to={`/election/${row.electionId}`} className="hover:text-greens-600 transition-colors">
-                          {row.electionName}
+                        <Link to={`/election/${r.electionId}?`} className="hover:text-greens-600 transition-colors">
+                          {r.division} - {r.electionName}
                         </Link>
                       </div>
                       <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
-                        <span>{row.date}</span>
-                        <span>•</span>
-                        <span className="font-mono">Div: {row.division}</span>
+                        <span>{r.date}</span>
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-slate-700">{row.contestName}</td>
-                    <td className={`px-5 py-4 font-mono font-bold ${
-                      isGreensWinner 
-                        ? 'text-greens-800 bg-greens-100/80 border-x border-greens-200' 
-                        : 'text-greens-600'
-                    }`}>
-                      {row.greens}%
+                    <td className={`px-5 py-3 font-mono font-bold ${isGrnWinner ? 'text-greens-800 bg-greens-100/50' : 'text-greens-650'}`}>
+                      {r.grnPct}% <span className="text-[10px] font-normal text-slate-400">({r.grn})</span>
                     </td>
-                    <td className={`px-5 py-4 font-mono ${
-                      isAlpWinner 
-                        ? 'text-red-800 bg-red-100/80 border-x border-red-200 font-bold' 
-                        : 'text-red-600 font-medium'
-                    }`}>
-                      {row.alp !== 0 ? `${row.alp}%` : '-'}
+                    <td className={`px-5 py-3 font-mono ${isAlpWinner ? 'text-red-800 bg-red-100/50 font-bold' : 'text-red-650'}`}>
+                      {r.alpPct}% <span className="text-[10px] font-normal text-slate-400">({r.alp})</span>
                     </td>
-                    <td className={`px-5 py-4 font-mono ${
-                      isLnpWinner 
-                        ? 'text-blue-800 bg-blue-100/80 border-x border-blue-200 font-bold' 
-                        : 'text-blue-600 font-medium'
-                    }`}>
-                      {row.lnp !== 0 ? `${row.lnp}%` : '-'}
+                    <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
+                      {r.lnpPct}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
                     </td>
-                    <td className={`px-5 py-4 font-mono ${
-                      isOthersWinner 
-                        ? 'text-slate-800 bg-slate-100/90 border-x border-slate-200 font-bold' 
-                        : 'text-slate-500'
-                    }`}>
-                      {row.others !== 0 ? `${row.others}%` : '-'}
+                    <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-800 bg-slate-100/50 font-bold' : 'text-slate-450'}`}>
+                      {r.othPct}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
                     </td>
-                    <td className="px-5 py-4 text-right">
-                      <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">
-                        {row.type}
-                      </span>
+                    <td className="px-5 py-3 text-right font-mono text-slate-500">
+                      {r.total.toLocaleString()}
                     </td>
                   </tr>
                 );

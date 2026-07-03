@@ -29,19 +29,19 @@ type ElectionSummary = {
 
 type SortField = 'grnPct' | 'grnVotes' | 'year' | 'totalVotes';
 
-const ELECTION_TYPE_LABELS: Record<string, string> = {
-  federal: 'Federal',
-  state: 'State',
-  local: 'Local',
-  'by-election': 'By-election',
-};
+// const ELECTION_TYPE_LABELS: Record<string, string> = {
+//   federal: 'Federal',
+//   state: 'State',
+//   local: 'Local',
+//   'by-election': 'By-election',
+// };
 
-const TYPE_COLORS: Record<string, string> = {
-  federal: 'bg-violet-50 text-violet-700 border-violet-200',
-  state:   'bg-sky-50 text-sky-700 border-sky-200',
-  local:   'bg-amber-50 text-amber-700 border-amber-200',
-  'by-election': 'bg-rose-50 text-rose-700 border-rose-200',
-};
+// const TYPE_COLORS: Record<string, string> = {
+//   federal: 'bg-violet-50 text-violet-700 border-violet-200',
+//   state: 'bg-sky-50 text-sky-700 border-sky-200',
+//   local: 'bg-amber-50 text-amber-700 border-amber-200',
+//   'by-election': 'bg-rose-50 text-rose-700 border-rose-200',
+// };
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
@@ -86,10 +86,10 @@ export default function ElectionLeaderboard() {
     const rows = [...filteredRows];
     rows.sort((a, b) => {
       let cmp = 0;
-      if (sortField === 'grnPct')    cmp = a.grnPct - b.grnPct;
-      if (sortField === 'grnVotes')  cmp = a.grnVotes - b.grnVotes;
+      if (sortField === 'grnPct') cmp = a.grnPct - b.grnPct;
+      if (sortField === 'grnVotes') cmp = a.grnVotes - b.grnVotes;
       if (sortField === 'totalVotes') cmp = a.totalVotes - b.totalVotes;
-      if (sortField === 'year')      cmp = a.electionYear - b.electionYear;
+      if (sortField === 'year') cmp = a.electionYear - b.electionYear;
       return sortOrder === 'desc' ? -cmp : cmp;
     });
     return rows;
@@ -113,11 +113,10 @@ export default function ElectionLeaderboard() {
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 mb-2 flex items-center gap-2">
           <BarChart3 className="w-8 h-8 text-greens-600" />
-          Election Results Leaderboard
+          Elections Leaderboard
         </h1>
         <p className="text-slate-600 text-sm max-w-xl">
           Aggregated Greens first-preference totals per election contest, ranked across all elections.
-          Run <code className="bg-slate-100 px-1 rounded text-xs">npm run generate:summaries</code> after ingesting new data.
         </p>
       </div>
 
@@ -227,18 +226,17 @@ export default function ElectionLeaderboard() {
                 sortedRows.map((row, index) => {
                   const rank = index + 1;
                   const isTop3 = rank <= 3;
-                  const typeColor = TYPE_COLORS[row.electionType] ?? 'bg-slate-50 text-slate-600 border-slate-200';
+                  // const typeColor = TYPE_COLORS[row.electionType] ?? 'bg-slate-50 text-slate-600 border-slate-200';
 
                   return (
                     <tr key={row.id} className="hover:bg-slate-50/50">
                       {/* Rank */}
                       <td className="px-5 py-4">
                         <span
-                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-mono font-bold ${
-                            isTop3
-                              ? 'bg-yellow-50 text-yellow-700 border border-yellow-250 shadow-sm'
-                              : 'bg-slate-100 text-slate-600 border border-slate-200'
-                          }`}
+                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-mono font-bold ${isTop3
+                            ? 'bg-yellow-50 text-yellow-700 border border-yellow-250 shadow-sm'
+                            : 'bg-slate-100 text-slate-600 border border-slate-200'
+                            }`}
                         >
                           {rank}
                         </span>
@@ -255,9 +253,9 @@ export default function ElectionLeaderboard() {
                               ? `${row.electionName} — ${row.division}`
                               : row.electionName}
                           </Link>
-                          <span className={`border text-[9px] px-1.5 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${typeColor}`}>
+                          {/* <span className={`border text-[9px] px-1.5 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${typeColor}`}>
                             {ELECTION_TYPE_LABELS[row.electionType] ?? row.electionType}
-                          </span>
+                          </span> */}
                         </div>
                         <div className="text-[10px] text-slate-450 font-mono uppercase tracking-wider">
                           {row.boothCount} booths

@@ -109,24 +109,24 @@ export default function Completeness() {
                     .replace(' Newcastle Local', ' Local')
                     .replace(' Lake Macquarie Local', ' Local')
                     .replace(' NSW State', ' State');
-                  
+
                   // Extract year and a simple abbreviation
                   const year = election.date.substring(0, 4);
                   const typeLabel = election.type.toUpperCase().substring(0, 3);
                   const isNewcastle = election.division.includes("Newcastle");
-                  const isShortland = election.division.includes("Shortland");
+                  const isCharlestown = election.division.includes("Charlestown");
                   const isLakeMac = election.division.includes("Lake Macquarie");
-                  
+
                   let labelColor = "text-slate-600 bg-slate-100 border-slate-200";
                   if (election.type === "federal") labelColor = "text-blue-700 bg-blue-50 border-blue-100";
                   else if (election.type === "state") labelColor = "text-red-700 bg-red-50 border-red-100";
                   else if (election.type === "local") labelColor = "text-emerald-700 bg-emerald-50 border-emerald-100";
 
                   let divTag = "";
-                  if (isNewcastle && isShortland) divTag = "N/S";
-                  else if (isNewcastle) divTag = "NEW";
-                  else if (isShortland) divTag = "SHO";
-                  else if (isLakeMac) divTag = "LM";
+                  if (isNewcastle && election.type === 'local') divTag = "NEW";
+                  else if (isLakeMac && election.type === 'local') divTag = "LM";
+                  else if (election.type === 'by-election' && isNewcastle) divTag = 'NEW';
+                  else if (election.type === 'by-election' && isCharlestown) divTag = 'CHA';
 
                   return (
                     <th key={election.id} className="px-2 py-3 text-center border-r border-slate-200 min-w-[80px]" title={`${shortName} (${election.division})`}>
@@ -153,19 +153,17 @@ export default function Completeness() {
                           {booth.name}
                         </Link>
                         {booth.type && booth.type !== 'ordinary' && (
-                          <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${
-                            booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                          <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
                             booth.type === "postal" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                            booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
-                            "bg-rose-50 text-rose-700 border-rose-200"
-                          }`}>
+                              booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
+                                "bg-rose-50 text-rose-700 border-rose-200"
+                            }`}>
                             {booth.type === "pre-poll" ? "Pre-Poll" :
-                             booth.type === "postal" ? "Postal" :
-                             booth.type === "absent" ? "Absent" : "Declaration"}
+                              booth.type === "postal" ? "Postal" :
+                                booth.type === "absent" ? "Absent" : "Declaration"}
                           </span>
                         )}
                       </div>
-                      <div className="text-[10px] text-slate-400 font-normal mt-0.5">{booth.suburb}</div>
                     </td>
                     {sortedElections.map(election => {
                       const hasData = boothElectionIds.has(election.id);

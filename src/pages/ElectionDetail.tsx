@@ -24,7 +24,7 @@ export default function ElectionDetail() {
   const contests = useMemo(() => {
     if (!id) return [];
     const map = new Map<string, { contestName: string; division: string }>();
-    
+
     (boothsData as PollingPlace[]).forEach(booth => {
       booth.results.forEach(r => {
         if (r.electionId === id) {
@@ -54,7 +54,7 @@ export default function ElectionDetail() {
   // Aggregate results across all booths for the active contest
   const allBoothResults = useMemo(() => {
     if (!id || !activeContest) return [];
-    
+
     const list: {
       booth: PollingPlace;
       grn: number;
@@ -70,9 +70,9 @@ export default function ElectionDetail() {
     }[] = [];
 
     (boothsData as PollingPlace[]).forEach(booth => {
-      const contestResults = booth.results.filter(r => 
-        r.electionId === id && 
-        r.contestName === activeContest.contestName && 
+      const contestResults = booth.results.filter(r =>
+        r.electionId === id &&
+        r.contestName === activeContest.contestName &&
         r.division === activeContest.division
       );
       if (contestResults.length === 0) return;
@@ -143,7 +143,7 @@ export default function ElectionDetail() {
 
   // Filtered booth list for table display
   const filteredBoothResults = useMemo(() => {
-    const list = divisionBoothResults.filter(r => 
+    const list = divisionBoothResults.filter(r =>
       r.booth.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       r.booth.suburb.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -210,17 +210,16 @@ export default function ElectionDetail() {
             {contests.map((c, index) => {
               const isActive = selectedContestIdx === index;
               const isMayor = c.contestName.toLowerCase().includes('mayor');
-              const label = isMayor ? `${c.division} Mayor` : `${c.division} Councillor`;
+              const label = isMayor ? `Mayor` : `${c.division}`;
 
               return (
                 <button
                   key={`${c.contestName}-${c.division}`}
                   onClick={() => { setSelectedContestIdx(index); setSearchTerm(''); }}
-                  className={`px-4 py-2 text-sm font-semibold rounded-t-lg border-b-2 transition-all ${
-                    isActive
-                      ? 'border-greens-600 text-greens-700 bg-greens-50/20'
-                      : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
-                  }`}
+                  className={`px-4 py-2 text-sm font-semibold rounded-t-lg border-b-2 transition-all ${isActive
+                    ? 'border-greens-600 text-greens-700 bg-greens-50/20'
+                    : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
+                    }`}
                 >
                   {label}
                 </button>
@@ -246,19 +245,19 @@ export default function ElectionDetail() {
               { label: 'Coalition (LNP)', pct: overallTotals.lnpPct, votes: overallTotals.lnp, color: 'bg-blue-500', text: 'text-blue-750' },
               { label: 'Others (OTH)', pct: overallTotals.othPct, votes: overallTotals.oth, color: 'bg-slate-300', text: 'text-slate-600' }
             ].sort((a, b) => b.votes - a.votes)
-             .map(party => (
-              <div key={party.label} className="space-y-1">
-                <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-slate-700">{party.label}</span>
-                  <span className="font-mono">
-                    <strong className={party.text}>{party.pct}%</strong> • {party.votes.toLocaleString()} votes
-                  </span>
+              .map(party => (
+                <div key={party.label} className="space-y-1">
+                  <div className="flex justify-between text-xs font-semibold">
+                    <span className="text-slate-700">{party.label}</span>
+                    <span className="font-mono">
+                      <strong className={party.text}>{party.pct}%</strong> • {party.votes.toLocaleString()} votes
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div style={{ width: `${party.pct}%` }} className={`h-full ${party.color}`} />
+                  </div>
                 </div>
-                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div style={{ width: `${party.pct}%` }} className={`h-full ${party.color}`} />
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
@@ -350,15 +349,14 @@ export default function ElectionDetail() {
                             {r.booth.name}
                           </Link>
                           {r.booth.type && r.booth.type !== 'ordinary' && (
-                            <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${
-                              r.booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                            <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${r.booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
                               r.booth.type === "postal" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                              r.booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
-                              "bg-rose-50 text-rose-700 border-rose-200"
-                            }`}>
+                                r.booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
+                                  "bg-rose-50 text-rose-700 border-rose-200"
+                              }`}>
                               {r.booth.type === "pre-poll" ? "Pre-Poll" :
-                               r.booth.type === "postal" ? "Postal" :
-                               r.booth.type === "absent" ? "Absent" : "Declaration"}
+                                r.booth.type === "postal" ? "Postal" :
+                                  r.booth.type === "absent" ? "Absent" : "Declaration"}
                             </span>
                           )}
                         </div>

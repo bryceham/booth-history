@@ -40,7 +40,7 @@ function App() {
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
               >
                 <BarChart3 className="w-4 h-4 text-greens-600" />
-                <span>Election Leaderboard</span>
+                <span>Elections Leaderboard</span>
               </Link>
             </nav>
           </div>

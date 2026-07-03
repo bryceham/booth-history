@@ -144,7 +144,7 @@
     "othPct": 9.51,
     "totalVotes": 50736,
     "boothCount": 37,
-    "grnSwing": 3.18
+    "grnSwing": 2.24
   },
   {
     "id": "2023-state||Legislative Assembly||Charlestown",
@@ -323,17 +323,17 @@
     "electionYear": 2019,
     "contestName": "Legislative Assembly",
     "division": "Newcastle",
-    "grnVotes": 8168,
-    "grnPct": 15.52,
-    "alpVotes": 22193,
-    "alpPct": 42.17,
-    "lnpVotes": 13933,
-    "lnpPct": 26.48,
-    "othVotes": 8333,
-    "othPct": 15.83,
-    "totalVotes": 52627,
+    "grnVotes": 8281,
+    "grnPct": 16.46,
+    "alpVotes": 23231,
+    "alpPct": 46.17,
+    "lnpVotes": 13224,
+    "lnpPct": 26.28,
+    "othVotes": 5583,
+    "othPct": 11.1,
+    "totalVotes": 50319,
     "boothCount": 35,
-    "grnSwing": -2.81
+    "grnSwing": -1.87
   },
   {
     "id": "2019-state||Legislative Assembly||Charlestown",

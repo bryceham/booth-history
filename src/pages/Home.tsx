@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, MapPin, ChevronRight } from 'lucide-react';
+import { Search, ChevronRight } from 'lucide-react';
 import boothsData from '../data/booths.json';
 import electionsData from '../data/elections.json';
 import type { PollingPlace } from '../types';
@@ -20,7 +20,7 @@ export default function Home() {
         return false;
       }
       return booth.name.toLowerCase().includes(search.toLowerCase()) ||
-             booth.suburb.toLowerCase().includes(search.toLowerCase());
+        booth.suburb.toLowerCase().includes(search.toLowerCase());
     });
 
     return list.sort((a, b) => {
@@ -98,22 +98,6 @@ export default function Home() {
               const lnpPct = lnpResult ? lnpResult.percentage : 0;
               const othPct = Math.max(0, 100 - (grnPct + alpPct + lnpPct));
 
-              // Support Level Badge
-              let supportBadge = null;
-              if (grnPct >= 35) {
-                supportBadge = (
-                  <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] px-1.5 py-0.5 rounded font-semibold font-mono">
-                    High Support
-                  </span>
-                );
-              } else if (grnPct >= 25) {
-                supportBadge = (
-                  <span className="bg-emerald-50/50 text-emerald-600 border border-emerald-100 text-[10px] px-1.5 py-0.5 rounded font-semibold font-mono">
-                    Mid Support
-                  </span>
-                );
-              }
-
               const uniqueElectionsCount = new Set(booth.results.map(r => r.electionId)).size;
 
               return (
@@ -127,33 +111,19 @@ export default function Home() {
                       <h3 className="font-semibold text-slate-800 group-hover:text-greens-600 transition-colors truncate text-sm sm:text-base">
                         {booth.name}
                       </h3>
-                      {supportBadge}
                       {booth.type && booth.type !== 'ordinary' && (
-                        <span className={`border text-[9px] px-1.5 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${
-                          booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                        <span className={`border text-[9px] px-1.5 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${booth.type === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
                           booth.type === "postal" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                          booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
-                          "bg-rose-50 text-rose-700 border-rose-200"
-                        }`}>
+                            booth.type === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
+                              "bg-rose-50 text-rose-700 border-rose-200"
+                          }`}>
                           {booth.type === "pre-poll" ? "Pre-Poll" :
-                           booth.type === "postal" ? "Postal" :
-                           booth.type === "absent" ? "Absent" : "Declaration"}
+                            booth.type === "postal" ? "Postal" :
+                              booth.type === "absent" ? "Absent" : "Declaration"}
                         </span>
                       )}
                       <span className="bg-slate-100 text-slate-600 border border-slate-200 text-[10px] px-1.5 py-0.5 rounded font-mono font-semibold" title="Elections with data / total registered elections">
                         {uniqueElectionsCount}/{totalElectionsCount} elections
-                      </span>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                        {booth.suburb}
-                      </span>
-                      <span>•</span>
-                      <span>LGA: {booth.lga || 'N/A'}</span>
-                      <span>•</span>
-                      <span className="bg-slate-100 px-2 py-0.5 rounded text-[10px] text-slate-650 font-medium">
-                        {booth.division}
                       </span>
                     </div>
 

@@ -1,16 +1,16 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpDown, Award, Filter, Search, ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from 'recharts';
+// import {
+//   ResponsiveContainer,
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+// } from 'recharts';
 import boothsData from '../data/booths.json';
 import electionsData from '../data/elections.json';
 import type { PollingPlace, Election } from '../types';
@@ -84,7 +84,7 @@ export default function Leaderboard() {
 
         // Group type to compare with previous comparable elections
         const compareGroup = election.type === 'by-election' ? election.parentType || 'state' : election.type;
-        
+
         // Find previous comparable contest for this booth
         const comparableContests = booth.results
           .filter(r => r.party === 'GRN' && r.contestName === contest.contestName)
@@ -143,8 +143,8 @@ export default function Leaderboard() {
       const matchesLga = selectedLga === 'All' || row.lga === selectedLga;
       const matchesDivision = selectedDivision === 'All' || row.division === selectedDivision;
       const matchesSuburb = row.suburb.toLowerCase().includes(suburbSearch.toLowerCase()) ||
-                            row.boothName.toLowerCase().includes(suburbSearch.toLowerCase());
-      
+        row.boothName.toLowerCase().includes(suburbSearch.toLowerCase());
+
       const year = row.electionYear;
       const matchesYearMin = yearMin ? year >= parseInt(yearMin) : true;
       const matchesYearMax = yearMax ? year <= parseInt(yearMax) : true;
@@ -157,57 +157,29 @@ export default function Leaderboard() {
   }, [flatData, selectedType, selectedLga, selectedDivision, suburbSearch, yearMin, yearMax, hideSmallBooths]);
 
   // Generate chart data matching filter criteria
-  const chartData = useMemo(() => {
-    const uniqueElectionIds = Array.from(new Set(filteredRows.map((r: LeaderboardRow) => r.electionId)));
-    const sortedElections = uniqueElectionIds
-      .map(id => electionsMap.get(id))
-      .filter((e): e is Election => !!e)
-      .sort((a, b) => a.date.localeCompare(b.date));
+  // const chartData = useMemo(() => {
+  //   const uniqueElectionIds = Array.from(new Set(filteredRows.map((r: LeaderboardRow) => r.electionId)));
+  //   const sortedElections = uniqueElectionIds
+  //     .map(id => electionsMap.get(id))
+  //     .filter((e): e is Election => !!e)
+  //     .sort((a, b) => a.date.localeCompare(b.date));
 
-    return sortedElections.map(election => {
-      const dataPoint: any = {
-        electionId: election.id,
-        electionName: election.name,
-        dateLabel: election.date.split('-').reverse().join('/'),
-      };
+  //   return sortedElections.map(election => {
+  //     const dataPoint: any = {
+  //       electionId: election.id,
+  //       electionName: election.name,
+  //       dateLabel: election.date.split('-').reverse().join('/'),
+  //     };
 
-      filteredRows.forEach((row: LeaderboardRow) => {
-        if (row.electionId === election.id) {
-          dataPoint[row.boothName] = row.greensPercentage;
-        }
-      });
+  //     filteredRows.forEach((row: LeaderboardRow) => {
+  //       if (row.electionId === election.id) {
+  //         dataPoint[row.boothName] = row.greensPercentage;
+  //       }
+  //     });
 
-      return dataPoint;
-    });
-  }, [filteredRows, electionsMap]);
-
-  // Unique list of booths in the filtered set
-  const filteredUniqueBooths = useMemo(() => {
-    return Array.from(new Set(filteredRows.map((r: LeaderboardRow) => r.boothName))).sort();
-  }, [filteredRows]);
-
-  // Dynamic style generator for the chaos of lines
-  const getBoothStyle = (index: number) => {
-    // Shades of green/teal/lime/emerald (hues 90 to 170)
-    const hue = 90 + (index * 37) % 85; 
-    const saturation = 50 + (index * 13) % 40;
-    const lightness = 30 + (index * 7) % 25;
-    
-    // Varying dash arrays for visual differentiation
-    const dashOptions = [
-      undefined,        // solid
-      '5 5',            // dashed
-      '3 3',            // dotted
-      '8 4',            // long dashed
-      '6 3 2 3',        // dash-dot
-    ];
-    const strokeDasharray = dashOptions[index % dashOptions.length];
-    
-    return {
-      stroke: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
-      strokeDasharray
-    };
-  };
+  //     return dataPoint;
+  //   });
+  // }, [filteredRows, electionsMap]);
 
   // Sort the filtered rows
   const sortedRows = useMemo(() => {
@@ -253,7 +225,7 @@ export default function Leaderboard() {
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 mb-2 flex items-center gap-2">
           <Award className="w-8 h-8 text-yellow-600" />
-          Greens Leaderboard
+          Booth Leaderboard
         </h1>
         <p className="text-slate-600 text-sm max-w-xl">
           Historical rank of all booths in Newcastle and Lake Macquarie based on Greens first preference percentage.
@@ -379,7 +351,7 @@ export default function Leaderboard() {
       </div>
 
       {/* Historical Greens Trend Chart */}
-      <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-4">
+      {/* <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">
             Greens Historical Trend Chart
@@ -396,25 +368,25 @@ export default function Leaderboard() {
                 margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis 
-                  dataKey="dateLabel" 
-                  tick={{ fontSize: 10, fill: '#64748b' }} 
+                <XAxis
+                  dataKey="dateLabel"
+                  tick={{ fontSize: 10, fill: '#64748b' }}
                   stroke="#cbd5e1"
                 />
-                <YAxis 
+                <YAxis
                   tickFormatter={tick => `${tick}%`}
-                  tick={{ fontSize: 10, fill: '#64748b' }} 
+                  tick={{ fontSize: 10, fill: '#64748b' }}
                   stroke="#cbd5e1"
                 />
-                <Tooltip 
+                <Tooltip
                   formatter={(value: any, name: any) => [`${value}%`, name]}
                   contentStyle={{ fontSize: '11px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}
                 />
-                <Legend 
-                  layout="vertical" 
-                  align="right" 
-                  verticalAlign="middle" 
-                  wrapperStyle={{ maxHeight: '350px', overflowY: 'auto', paddingLeft: '10px', fontSize: '10px' }} 
+                <Legend
+                  layout="vertical"
+                  align="right"
+                  verticalAlign="middle"
+                  wrapperStyle={{ maxHeight: '350px', overflowY: 'auto', paddingLeft: '10px', fontSize: '10px' }}
                 />
                 {filteredUniqueBooths.map((boothName, index) => {
                   const style = getBoothStyle(index);
@@ -440,7 +412,7 @@ export default function Leaderboard() {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* Leaderboard Table Card */}
       <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
@@ -451,7 +423,7 @@ export default function Leaderboard() {
                 <th className="px-5 py-3.5 w-16">Rank</th>
                 <th className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60" onClick={() => handleSort('name')}>
                   <div className="flex items-center gap-1">
-                    <span>Booth / suburb</span>
+                    <span>Booth</span>
                     <ArrowUpDown className="w-3.5 h-3.5 text-slate-450" />
                   </div>
                 </th>
@@ -463,7 +435,7 @@ export default function Leaderboard() {
                 </th>
                 <th className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60" onClick={() => handleSort('percentage')}>
                   <div className="flex items-center gap-1">
-                    <span>Greens %</span>
+                    <span>Greens</span>
                     <ArrowUpDown className="w-3.5 h-3.5 text-slate-450" />
                   </div>
                 </th>
@@ -482,11 +454,10 @@ export default function Leaderboard() {
                     <tr key={`${row.boothId}-${row.electionId}-${row.contestName}`} className="hover:bg-slate-50/50">
                       <td className="px-5 py-4">
                         <span
-                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-mono font-bold ${
-                            isTop3
-                              ? 'bg-yellow-50 text-yellow-700 border border-yellow-250 shadow-sm font-semibold'
-                              : 'bg-slate-100 text-slate-655 border border-slate-200'
-                          }`}
+                          className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-mono font-bold ${isTop3
+                            ? 'bg-yellow-50 text-yellow-700 border border-yellow-250 shadow-sm font-semibold'
+                            : 'bg-slate-100 text-slate-655 border border-slate-200'
+                            }`}
                         >
                           {rank}
                         </span>
@@ -500,15 +471,14 @@ export default function Leaderboard() {
                             {row.boothName}
                           </Link>
                           {row.boothType && row.boothType !== 'ordinary' && (
-                            <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${
-                              row.boothType === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                            <span className={`border text-[9px] px-1 py-0.2 rounded font-bold font-mono uppercase tracking-wider ${row.boothType === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
                               row.boothType === "postal" ? "bg-blue-50 text-blue-700 border-blue-200" :
-                              row.boothType === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
-                              "bg-rose-50 text-rose-700 border-rose-200"
-                            }`}>
+                                row.boothType === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
+                                  "bg-rose-50 text-rose-700 border-rose-200"
+                              }`}>
                               {row.boothType === "pre-poll" ? "Pre-Poll" :
-                               row.boothType === "postal" ? "Postal" :
-                               row.boothType === "absent" ? "Absent" : "Declaration"}
+                                row.boothType === "postal" ? "Postal" :
+                                  row.boothType === "absent" ? "Absent" : "Declaration"}
                             </span>
                           )}
                         </div>
@@ -521,7 +491,7 @@ export default function Leaderboard() {
                           </Link>
                         </div>
                         <div className="text-[10px] text-slate-550 mt-0.5 uppercase tracking-wider font-mono">
-                          {row.contestName} ({row.division})
+                          {row.division}
                         </div>
                       </td>
                       <td className="px-5 py-4 font-mono font-bold text-greens-600 text-base">

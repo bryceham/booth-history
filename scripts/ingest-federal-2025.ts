@@ -103,8 +103,8 @@ parsedRows.forEach(row => {
 
   // If not found, try a looser match (e.g. "Newcastle City Hall" matches "Newcastle City")
   if (!booth) {
-    booth = booths.find(b => 
-      b.name.toLowerCase().includes(rawName.toLowerCase()) || 
+    booth = booths.find(b =>
+      b.name.toLowerCase().includes(rawName.toLowerCase()) ||
       rawName.toLowerCase().includes(b.name.toLowerCase())
     );
   }
@@ -116,7 +116,6 @@ parsedRows.forEach(row => {
       party: "GRN",
       votes: grnVotes,
       percentage: grnPercentage,
-      isElected: false
     },
     {
       electionId: "2025-federal",
@@ -124,7 +123,6 @@ parsedRows.forEach(row => {
       party: "LNP", // standardizing LIB to LNP
       votes: libVotes,
       percentage: libPercentage,
-      isElected: false
     },
     {
       electionId: "2025-federal",
@@ -132,21 +130,8 @@ parsedRows.forEach(row => {
       party: "ALP",
       votes: alpVotes,
       percentage: alpPercentage,
-      isElected: false // will determine below or keep false
     }
   ];
-
-  // Determine isElected based on highest votes between ALP and LNP/LIB
-  if (alpVotes > libVotes && alpVotes > grnVotes) {
-    const alpRes = newResults.find(r => r.party === 'ALP');
-    if (alpRes) alpRes.isElected = true;
-  } else if (libVotes > alpVotes && libVotes > grnVotes) {
-    const lnpRes = newResults.find(r => r.party === 'LNP');
-    if (lnpRes) lnpRes.isElected = true;
-  } else if (grnVotes > alpVotes && grnVotes > libVotes) {
-    const grnRes = newResults.find(r => r.party === 'GRN');
-    if (grnRes) grnRes.isElected = true;
-  }
 
   if (booth) {
     // Remove any existing 2025-federal results for this booth to avoid duplicates

@@ -483,7 +483,7 @@ St Andrews Mayfield	29	189	714	33	21	13	253	46	1298
 St Johns Cooks Hill	40	383	647	27	41	23	477	34	1672
 St Matthews Anglican Georgetown	6	90	266	16	6	10	103	23	520
 St Thereses New Lambton	13	80	351	23	5	9	173	24	678
-Stockton Public	240	32	31	577	31	22	1140	2073
+Stockton Public	38	145	1069	41	42	25	431	47	1838
 Sydney Town Hall	0	8	10	0	1	2	10	1	32
 The Junction Public	46	362	828	58	23	33	632	51	2033
 Tighes Hill Public	29	527	643	31	35	27	239	34	1565
