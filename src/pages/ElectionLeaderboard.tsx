@@ -258,7 +258,7 @@ export default function ElectionLeaderboard() {
                             className="font-bold text-slate-900 hover:text-greens-600 transition-colors text-sm"
                           >
                             {multiDivisionIds.has(row.electionId)
-                              ? `${row.electionName} — ${row.division}`
+                              ? `${row.electionName} — ${row.contestName.toLowerCase().includes('mayor') ? 'Mayor' : row.division}`
                               : row.electionName}
                           </Link>
                           {/* <span className={`border text-[9px] px-1.5 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${typeColor}`}>

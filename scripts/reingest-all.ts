@@ -14,8 +14,8 @@ booths.forEach(b => {
     r.electionId !== '2014-by-election-charlestown' &&
     r.electionId !== '2014-by-election-newcastle' &&
     r.electionId !== '2024-lake-macquarie-local' &&
-    r.electionId !== '2024-local-newcastle' &&
-    r.electionId !== '2025-federal'
+    !(r.electionId === '2024-local-newcastle' && r.contestName === 'Mayor') &&
+    !(r.electionId === '2021-local-newcastle' && r.contestName === 'Lord Mayoral')
   );
 });
 
@@ -1057,7 +1057,80 @@ addResult("Newcastle Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2024-loc
 addResult("Wallsend Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2024-local-newcastle", "Mayor", 656, 3069, 1262, 164 + 259 + 2760, 8170);
 addResult("Declared Institution (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2024-local-newcastle", "Mayor", 17, 154, 70, 21 + 17 + 84, 363);
 addResult("Provisional (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2024-local-newcastle", "Mayor", 1140, 1315, 601, 167 + 160 + 777, 4160);
-addResult("Postal (Newcastle)", "postal", "Newcastle", lgaNewcastle, "2024-local-newcastle", "Mayor", 765, 2489, 1166, 122 + 243 + 3026, 7811);
+addResult("Postal (Newcastle)", "postal", "Newcastle", lgaNewcastle, "2024-local-newcastle", "Mayor", 765, 2489, 1166, 122 + 243 + 3026, 7811);// 10. 2021 NEWCASTLE MAYORAL ELECTION
+const raw2021NewcastleMayor = `Adamstown Snr Ctzn Cntr	260	462	43	243	24	139	1171
+All Saints New Lambton	347	523	27	180	21	173	1271
+Beresfield Public	520	750	77	94	13	188	1642
+Callaghan Cllg - Jesmond Snr	245	610	51	215	19	119	1259
+Callaghan Cllg - Wallsend	352	802	75	134	26	186	1575
+Callaghan Cllg - Waratah Tech	67	152	9	69	7	21	325
+Cardiff Hghts Baptist	51	63	8	22	3	19	166
+Carrington Public	344	559	19	363	54	125	1464
+Elermore Vale Public	356	658	53	128	19	176	1390
+Glendore Public	292	753	40	124	17	205	1431
+Hamilton Comm. Hive	109	196	16	184	15	60	580
+Hamilton Nth Public	117	228	16	93	14	41	509
+Hamilton Public	344	611	54	442	49	166	1666
+Hamilton Sth Comm. Hall	112	215	13	53	13	29	435
+Hamilton Sth Public	511	530	43	241	32	243	1600
+Islington Public	245	423	28	489	47	77	1309
+Jesmond Public	50	105	10	38	6	30	239
+Kotara High	307	415	25	150	13	150	1060
+Kotara Sth Public	272	368	26	117	8	98	889
+Lambton High	241	457	49	132	22	88	989
+Maryland Public	324	722	49	87	20	126	1328
+Mayfield Church of Christ	167	238	15	108	30	47	605
+Mayfield E Public	234	435	23	271	36	74	1073
+Mayfield Presbyterian	316	505	28	231	47	70	1197
+Merewether Hghts Public	337	398	20	157	9	174	1095
+Merewether Uniting	247	339	25	124	11	138	884
+Minmi Hall	218	350	33	60	11	139	811
+New Lambton Sth Public	331	678	37	217	22	139	1424
+Newcastle E Public	343	307	12	348	94	122	1226
+Newcastle TAFE	85	135	12	183	22	26	463
+Our Lady of Victories Shortland	177	352	39	96	13	78	755
+Shortland Public	254	527	40	90	22	108	1041
+St Andrews Mayfield	228	350	20	153	30	53	834
+St Augustine's Anglican	244	196	29	88	12	100	669
+St Columba's Adamstown	355	416	44	167	25	140	1147
+St John the Baptist Lambton	399	498	56	131	11	143	1238
+St Johns Cooks Hill	357	372	19	264	37	130	1179
+St Patricks Wallsend	98	251	10	41	7	28	435
+St Thereses New Lambton	359	690	64	209	19	207	1548
+Stockton Public	437	463	26	131	29	137	1223
+Tarro Hall	99	159	10	14	2	24	308
+The Junction Public	515	706	59	359	20	341	2000
+Wallsend Comm. Pre-School	104	194	13	49	6	29	395
+Wallsend Public	248	637	43	136	17	146	1227
+Wallsend Sth Public	337	577	40	104	14	128	1200
+Warabrook Comm. Cntr	229	320	8	70	9	86	722
+Waratah Public	281	623	37	210	19	127	1297
+Waratah W Public	138	299	25	82	10	46	600
+WEA Hunter Laman St Campus	239	224	14	166	28	76	747`;
+
+raw2021NewcastleMayor.split('\n').forEach(line => {
+  const parts = line.split('\t');
+  const name = parts[0].trim();
+  const church = parseNumber(parts[1]);
+  const nelmes = parseNumber(parts[2]);
+  const holding = parseNumber(parts[3]);
+  const mackenzie = parseNumber(parts[4]);
+  const obrien = parseNumber(parts[5]);
+  const barrie = parseNumber(parts[6]);
+  const total = parseNumber(parts[7]);
+
+  addResult(name, "ordinary", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", mackenzie, nelmes, barrie, church + holding + obrien, total);
+});
+
+// Specials for Newcastle 2021 Mayor
+addResult("Adamstown Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 814, 2303, 863, 2025 + 131 + 80, 6216);
+addResult("Lambton Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 276, 1000, 252, 823 + 77 + 37, 2465);
+addResult("Mayfield Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 556, 1626, 379, 1538 + 78 + 101, 4278);
+addResult("Newcastle RO Office", "pre-poll", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 673, 1169, 478, 1387 + 54 + 96, 3857);
+addResult("Wallsend Pre-Poll", "pre-poll", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 516, 3948, 964, 2509 + 226 + 90, 8253);
+addResult("Enrolment/NAMAV", "other-dec", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 920, 1896, 477, 725 + 184 + 106, 4308);
+addResult("iVote", "other-dec", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 2253, 7193, 2176, 3380 + 511 + 281, 15794);
+addResult("Postal (Newcastle)", "postal", "Newcastle", lgaNewcastle, "2021-local-newcastle", "Lord Mayoral", 391, 2076, 579, 2100 + 222 + 95, 5463);
 
 
 // Cleanup any empty booths

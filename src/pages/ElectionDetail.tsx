@@ -381,7 +381,7 @@ export default function ElectionDetail() {
                       <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
                         {r.lnpPct}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
                       </td>
-                      <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-800 bg-slate-100/50 font-bold' : 'text-slate-450'}`}>
+                      <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-900 bg-slate-200/70 font-bold' : 'text-slate-450'}`}>
                         {r.othPct}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
                       </td>
                       <td className="px-5 py-3 text-right font-mono text-slate-500">

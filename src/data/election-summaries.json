@@ -18,7 +18,7 @@
     "othPct": 56.98,
     "totalVotes": 102171,
     "boothCount": 57,
-    "grnSwing": null
+    "grnSwing": 5.27
   },
   {
     "id": "2025-federal||House of Representatives||Newcastle",
@@ -291,6 +291,27 @@
     "othPct": 19.4,
     "totalVotes": 26089,
     "boothCount": 27,
+    "grnSwing": null
+  },
+  {
+    "id": "2021-local-newcastle||Lord Mayoral||Newcastle",
+    "electionId": "2021-local-newcastle",
+    "electionName": "2021 Newcastle Local Election",
+    "electionType": "local",
+    "electionDate": "2021-12-04",
+    "electionYear": 2021,
+    "contestName": "Lord Mayoral",
+    "division": "Newcastle",
+    "grnVotes": 14256,
+    "grnPct": 14.22,
+    "alpVotes": 42052,
+    "alpPct": 41.94,
+    "lnpVotes": 11683,
+    "lnpPct": 11.65,
+    "othVotes": 32284,
+    "othPct": 32.2,
+    "totalVotes": 100275,
+    "boothCount": 57,
     "grnSwing": null
   },
   {

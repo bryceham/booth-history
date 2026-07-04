@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, AlertCircle, TrendingUp } from 'lucide-react';
 import {
@@ -14,10 +14,21 @@ import {
 import boothGroupsData from '../data/booth-groups.json';
 import boothsData from '../data/booths.json';
 import electionsData from '../data/elections.json';
-import type { PollingPlace, Election, BoothGroup } from '../types';
+import type { PollingPlace, Election, BoothGroup, ContestResult } from '../types';
+
+const getContestDisplayName = (contestName: string) => {
+  if (contestName.toLowerCase().includes('mayoral') || contestName.toLowerCase().includes('mayor')) {
+    return 'Mayor';
+  }
+  if (contestName === 'Councillor') {
+    return 'Councillor';
+  }
+  return '';
+};
 
 export default function BoothDetail() {
   const { id } = useParams<{ id: string }>();
+  const [aggregateDivisions, setAggregateDivisions] = useState(true);
 
   const group = useMemo(() => {
     return (boothGroupsData as BoothGroup[]).find(g => g.slug === id);
@@ -61,50 +72,93 @@ export default function BoothDetail() {
   const tableData = useMemo(() => {
     if (!booth) return [];
 
-    // Group contest results by their election type / parentType (for by-elections)
-    // and sort them chronologically.
-    const sortedContests = [...booth.results]
-      .map(result => {
-        const election = electionsMap.get(result.electionId);
-        return {
-          result,
-          election,
-          compareGroup: election
-            ? (election.type === 'by-election' ? election.parentType || 'state' : election.type)
-            : 'other',
-          date: election ? election.date : '1970-01-01'
+    // Group results by key to handle aggregation
+    const groups: {
+      [key: string]: {
+        electionId: string;
+        contestName: string;
+        boothName: string;
+        divisions: Set<string>;
+        results: ContestResult[];
+        date: string;
+        electionName: string;
+        type: string;
+      }
+    } = {};
+
+    const resultsWithElection = booth.results.map(r => {
+      const election = electionsMap.get(r.electionId);
+      return {
+        r,
+        election,
+        date: election ? election.date : '1970-01-01',
+        electionName: election?.name || 'Unknown Election',
+      };
+    }).sort((a, b) => a.date.localeCompare(b.date));
+
+    resultsWithElection.forEach(({ r, election, date, electionName }) => {
+      const div = r.division || election?.division || 'Unknown';
+      const key = aggregateDivisions
+        ? `${r.electionId}-${r.contestName}-${r.boothName}`
+        : `${r.electionId}-${r.contestName}-${r.boothName}-${div}`;
+
+      if (!groups[key]) {
+        groups[key] = {
+          electionId: r.electionId,
+          contestName: r.contestName,
+          boothName: r.boothName || booth.name,
+          divisions: new Set<string>(),
+          results: [],
+          date,
+          electionName,
+          type: election?.type || 'federal',
         };
-      })
-      .sort((a, b) => a.date.localeCompare(b.date)); // Chronological order (old to new)
+      }
+      groups[key].divisions.add(div);
+      groups[key].results.push(r);
+    });
 
-    const computedRows = sortedContests.map((item) => {
-      const currentElection = item.election;
-      const currentContest = item.result;
-
-      // Group votes by major blocks
-      const allResultsForElectionAndContest = booth.results.filter(
-        r => r.electionId === currentContest.electionId &&
-             r.contestName === currentContest.contestName &&
-             r.boothName === currentContest.boothName &&
-             (r.division || currentElection?.division) === (currentContest.division || currentElection?.division)
-      );
-
-      const grn = allResultsForElectionAndContest.find(r => r.party === 'GRN')?.votes || 0;
-      const alp = allResultsForElectionAndContest.find(r => r.party === 'ALP')?.votes || 0;
-      const lnp = allResultsForElectionAndContest.find(r => r.party === 'LNP')?.votes || 0;
-      const oth = allResultsForElectionAndContest.find(r => r.party === 'OTH')?.votes || 0;
+    const computedRows = Object.values(groups).map(g => {
+      const grn = g.results.filter(r => r.party === 'GRN').reduce((sum, r) => sum + r.votes, 0);
+      const alp = g.results.filter(r => r.party === 'ALP').reduce((sum, r) => sum + r.votes, 0);
+      const lnp = g.results.filter(r => r.party === 'LNP').reduce((sum, r) => sum + r.votes, 0);
+      const oth = g.results.filter(r => r.party === 'OTH').reduce((sum, r) => sum + r.votes, 0);
       const total = grn + alp + lnp + oth;
 
-      if (total === 0) return;
+      if (total === 0) return null;
+
+      // Only show rows where Greens had a candidate
+      const hasGrn = g.results.some(r => r.party === 'GRN');
+      if (!hasGrn) return null;
+
+      const sortedDivisions = Array.from(g.divisions).sort();
+      const division = sortedDivisions.join(' / ');
+      const primaryDivision = sortedDivisions[0] || 'Unknown';
+
+      // Count unique contests for this election in this booth
+      const uniqueContestsCount = new Set(
+        booth.results
+          .filter(r => r.electionId === g.electionId)
+          .map(r => r.contestName)
+      ).size;
+
+      let displayName = division;
+      if (uniqueContestsCount > 1) {
+        const contestDisplay = getContestDisplayName(g.contestName);
+        if (contestDisplay && contestDisplay !== 'Councillor') {
+          displayName = contestDisplay;
+        }
+      }
 
       return {
-        electionId: currentContest.electionId,
-        contestName: currentContest.contestName,
-        electionName: currentElection?.name || 'Unknown Election',
-        date: item.date,
-        type: currentElection?.type || 'federal',
-        division: currentContest.division || currentElection?.division || 'Unknown',
-        booth,
+        electionId: g.electionId,
+        contestName: g.contestName,
+        electionName: g.electionName,
+        type: g.type,
+        date: g.date,
+        division,
+        primaryDivision,
+        displayName,
         grn,
         grnPct: parseFloat(((grn / total) * 100).toFixed(2)),
         alp,
@@ -114,31 +168,50 @@ export default function BoothDetail() {
         oth,
         othPct: parseFloat(((oth / total) * 100).toFixed(2)),
         total,
-        rawResult: currentContest,
-        boothName: currentContest.boothName || booth.name
+        boothName: g.boothName
       };
+    }).filter((row): row is NonNullable<typeof row> => row !== null);
 
-    })
-      .filter((row): row is NonNullable<typeof row> => row !== undefined);;
+    return computedRows.sort((a, b) => {
+      if (a.date !== b.date) {
+        return b.date.localeCompare(a.date);
+      }
 
-    // Return in reverse chronological order (newest first) for the table view
-    return computedRows
-      .filter(row => row.rawResult.party === 'GRN') // Only show rows where Greens had a candidate
-      .sort((a, b) => b.date.localeCompare(a.date));
-  }, [booth, electionsMap]);
+      const aIsMayor = a.contestName.toLowerCase().includes('mayor');
+      const bIsMayor = b.contestName.toLowerCase().includes('mayor');
+      if (aIsMayor && !bIsMayor) return -1;
+      if (!aIsMayor && bIsMayor) return 1;
+      return 0;
+    });
+  }, [booth, electionsMap, aggregateDivisions]);
 
   // Recharts Chart Data (chronological order)
   const chartData = useMemo(() => {
     return [...tableData]
-      .sort((a, b) => a.date.localeCompare(b.date))
+      .sort((a, b) => {
+        if (a.date !== b.date) {
+          return a.date.localeCompare(b.date);
+        }
+
+        const aIsMayor = a.contestName.toLowerCase().includes('mayor');
+        const bIsMayor = b.contestName.toLowerCase().includes('mayor');
+        if (aIsMayor && !bIsMayor) return -1;
+        if (!aIsMayor && bIsMayor) return 1;
+        return 0;
+      })
       .map(row => ({
-        key: `${row.division}-${row.electionId}-${row.boothName}`,
+        key: `${row.division}-${row.contestName}-${row.electionId}-${row.boothName}`,
         electionName: row.electionName,
         division: row.division,
+        displayName: row.displayName,
+        contestName: row.contestName,
         boothName: row.boothName,
+        type: row.type,
+        date: row.date,
         'Greens %': row.grnPct,
         'ALP %': row.alpPct || null,
         'LNP %': row.lnpPct || null,
+        'Others %': row.othPct || null,
       }));
   }, [tableData]);
 
@@ -155,17 +228,58 @@ export default function BoothDetail() {
     );
     
     if (duplicates.length > 1) {
-      const hasMultipleDivisions = new Set(duplicates.map(d => d.division)).size > 1;
       const hasMultipleBooths = new Set(duplicates.map(d => d.boothName)).size > 1;
       
       const suffixes = [];
-      if (hasMultipleDivisions) suffixes.push(item.division);
+      suffixes.push(item.displayName);
       if (hasMultipleBooths && booth && item.boothName !== booth.name) suffixes.push(item.boothName);
       
       if (suffixes.length > 0) {
         label += ` (${suffixes.join(' - ')})`;
       }
     }
+    return label;
+  };
+
+  const formatXAxisLabel = (value: any) => {
+    if (typeof value !== 'string') return '';
+    const item = chartData.find(d => d.key === value);
+    if (!item) return value;
+
+    const year = item.date ? item.date.substring(0, 4) : '';
+    let typeLetter = '';
+    switch (item.type) {
+      case 'federal':
+        typeLetter = 'F';
+        break;
+      case 'state':
+        typeLetter = 'S';
+        break;
+      case 'local':
+        typeLetter = 'L';
+        break;
+      case 'by-election':
+        typeLetter = 'B';
+        break;
+      default:
+        typeLetter = '?';
+    }
+
+    let label = `${year} ${typeLetter}`;
+
+    const duplicates = chartData.filter(d => d.electionName === item.electionName);
+    if (duplicates.length > 1) {
+      const hasMultipleBooths = new Set(duplicates.map(d => d.boothName)).size > 1;
+      const suffixes = [];
+      if (item.displayName === 'Mayor') {
+        suffixes.push('Mayor');
+      }
+      if (hasMultipleBooths && booth && item.boothName !== booth.name) suffixes.push(item.boothName);
+      if (suffixes.length > 0) {
+        label += ` (${suffixes.join(' - ')})`;
+      }
+    }
+
     return label;
   };
 
@@ -198,16 +312,17 @@ export default function BoothDetail() {
               Also known as: {group.rawNames.filter(n => n !== group.displayName).join(', ')}
             </p>
           )}
-          {/* <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-4 h-4 text-slate-400" />
-                  {booth.suburb}
-                </span>
-                <span>•</span>
-                <span>LGA: {booth.lga || 'N/A'}</span>
-                <span>•</span>
-                <span>Current Division: <strong className="text-slate-800">{booth.division}</strong></span>
-              </div> */}
+        </div>
+        <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-lg border border-slate-200 text-sm">
+          <label className="flex items-center gap-2 cursor-pointer select-none px-2 py-1">
+            <input
+              type="checkbox"
+              checked={aggregateDivisions}
+              onChange={(e) => setAggregateDivisions(e.target.checked)}
+              className="rounded border-slate-300 text-greens-600 focus:ring-greens-500"
+            />
+            <span className="font-medium text-slate-700">Aggregate divisions</span>
+          </label>
         </div>
       </div>
 
@@ -222,7 +337,13 @@ export default function BoothDetail() {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="key" stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={formatChartLabel} />
+                <XAxis
+                  dataKey="key"
+                  stroke="#64748b"
+                  fontSize={10}
+                  tickLine={false}
+                  tickFormatter={formatXAxisLabel}
+                />
                 <YAxis stroke="#64748b" fontSize={11} tickLine={false} domain={[0, 'auto']} />
                 <Tooltip
                   contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', color: '#0f172a' }}
@@ -248,6 +369,13 @@ export default function BoothDetail() {
                   type="monotone"
                   dataKey="LNP %"
                   stroke="#2563eb"
+                  strokeWidth={1.5}
+                  strokeDasharray="4 4"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="Others %"
+                  stroke="#64748b"
                   strokeWidth={1.5}
                   strokeDasharray="4 4"
                 />
@@ -286,8 +414,10 @@ export default function BoothDetail() {
                   <tr key={`${r.electionId}-${r.contestName}-${idx}`} className="hover:bg-slate-50/50">
                     <td className="px-5 py-4">
                       <div className="font-semibold text-slate-800">
-                        <Link to={`/election/${r.electionId}?contest=${`${r.contestName}-${r.division}`.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-greens-600 transition-colors">
-                          {r.division} - {r.electionName}
+                        <Link to={`/election/${r.electionId}?contest=${`${r.contestName}-${r.primaryDivision}`.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-greens-600 transition-colors">
+                          {r.electionName.toLowerCase().includes(r.displayName.toLowerCase())
+                            ? r.electionName
+                            : `${r.displayName} - ${r.electionName}`}
                         </Link>
                       </div>
                       <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
@@ -305,7 +435,7 @@ export default function BoothDetail() {
                     <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
                       {r.lnpPct}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
                     </td>
-                    <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-800 bg-slate-100/50 font-bold' : 'text-slate-450'}`}>
+                    <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-900 bg-slate-200/70 font-bold' : 'text-slate-450'}`}>
                       {r.othPct}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
                     </td>
                     <td className="px-5 py-3 text-right font-mono text-slate-500">
