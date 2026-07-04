@@ -128,8 +128,8 @@ export default function Home() {
                     </div>
 
                     {/* Stacked Vote Share Bar */}
-                    <div className="flex items-center gap-3 pt-1 max-w-md">
-                      <div className="h-1.5 rounded-full overflow-hidden flex bg-slate-150 w-28 sm:w-36">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 pt-1 w-full max-w-md">
+                      <div className="h-1.5 rounded-full overflow-hidden flex bg-slate-150 w-full sm:w-36">
                         <div style={{ width: `${grnPct}%` }} className="bg-emerald-500" title={`Greens: ${grnPct}%`} />
                         <div style={{ width: `${alpPct}%` }} className="bg-red-500" title={`ALP: ${alpPct}%`} />
                         <div style={{ width: `${lnpPct}%` }} className="bg-blue-500" title={`LNP: ${lnpPct}%`} />

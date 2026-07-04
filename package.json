@@ -8,10 +8,6 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "ingest:federal": "tsx scripts/ingest-federal.ts",
-    "ingest:state": "tsx scripts/ingest-state.ts",
-    "ingest:local": "tsx scripts/ingest-local.ts",
-    "ingest:by-elections": "tsx scripts/ingest-by-elections.ts",
     "generate:summaries": "tsx scripts/generate-election-summaries.ts"
   },
   "dependencies": {
