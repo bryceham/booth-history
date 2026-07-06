@@ -67,6 +67,12 @@ export default function BoothDetail() {
     return map;
   }, []);
 
+  const sortedElections = useMemo(() => {
+    return [...(electionsData as Election[])].sort((a, b) => b.date.localeCompare(a.date));
+  }, []);
+
+
+
   // Compute table rows with grouped parties
   const tableData = useMemo(() => {
     if (!booth) return [];
@@ -98,7 +104,7 @@ export default function BoothDetail() {
     resultsWithElection.forEach(({ r, election, date, electionName }) => {
       const div = r.division || election?.division || 'Unknown';
       const key = aggregateDivisions
-        ? `${r.electionId}-${r.contestName}-${r.boothName}`
+        ? `${r.electionId}-${r.contestName}`
         : `${r.electionId}-${r.contestName}-${r.boothName}-${div}`;
 
       if (!groups[key]) {
@@ -402,46 +408,69 @@ export default function BoothDetail() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-150">
-              {tableData.map((r, idx) => {
-                const maxPct = Math.max(r.grnPct, r.alpPct, r.lnpPct, r.othPct);
-                const isGrnWinner = r.grnPct === maxPct;
-                const isAlpWinner = r.alpPct === maxPct;
-                const isLnpWinner = r.lnpPct === maxPct;
-                const isOthWinner = r.othPct === maxPct;
+              {sortedElections.map(election => {
+                const electionRows = tableData.filter(r => r.electionId === election.id);
+                if (electionRows.length > 0) {
+                  return electionRows.map((r, idx) => {
+                    const maxPct = Math.max(r.grnPct, r.alpPct, r.lnpPct, r.othPct);
+                    const isGrnWinner = r.grnPct === maxPct;
+                    const isAlpWinner = r.alpPct === maxPct;
+                    const isLnpWinner = r.lnpPct === maxPct;
+                    const isOthWinner = r.othPct === maxPct;
 
-                return (
-                  <tr key={`${r.electionId}-${r.contestName}-${idx}`} className="hover:bg-slate-50/50">
-                    <td className="px-5 py-4">
-                      <div className="font-semibold text-slate-800">
-                        <Link to={`/election/${r.electionId}?contest=${`${r.contestName}-${r.primaryDivision}`.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-greens-600 transition-colors">
-                          {r.electionName.toLowerCase().includes(r.displayName.toLowerCase())
-                            ? r.electionName
-                            : `${r.displayName} - ${r.electionName}`}
-                        </Link>
-                      </div>
-                      <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
-                        <span>{r.boothName}</span>
-                        <span>•</span>
-                        <span>{r.date}</span>
-                      </div>
-                    </td>
-                    <td className={`px-5 py-3 font-mono font-bold ${isGrnWinner ? 'text-greens-800 bg-greens-100/50' : 'text-greens-650'}`}>
-                      {r.grnPct}% <span className="text-[10px] font-normal text-slate-400">({r.grn})</span>
-                    </td>
-                    <td className={`px-5 py-3 font-mono ${isAlpWinner ? 'text-red-800 bg-red-100/50 font-bold' : 'text-red-650'}`}>
-                      {r.alpPct}% <span className="text-[10px] font-normal text-slate-400">({r.alp})</span>
-                    </td>
-                    <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
-                      {r.lnpPct}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
-                    </td>
-                    <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-900 bg-slate-200/70 font-bold' : 'text-slate-450'}`}>
-                      {r.othPct}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
-                    </td>
-                    <td className="px-5 py-3 text-right font-mono text-slate-500">
-                      {r.total.toLocaleString()}
-                    </td>
-                  </tr>
-                );
+                    return (
+                      <tr key={`${r.electionId}-${r.contestName}-${idx}`} className="hover:bg-slate-50/50">
+                        <td className="px-5 py-4">
+                          <div className="font-semibold text-slate-800">
+                            <Link to={`/election/${r.electionId}?contest=${`${r.contestName}-${r.primaryDivision}`.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-greens-600 transition-colors">
+                              {r.electionName.toLowerCase().includes(r.displayName.toLowerCase())
+                                ? r.electionName
+                                : `${r.displayName} - ${r.electionName}`}
+                            </Link>
+                          </div>
+                          <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+                            <span>{r.boothName}</span>
+                            <span>•</span>
+                            <span>{r.date}</span>
+                          </div>
+                        </td>
+                        <td className={`px-5 py-3 font-mono ${isGrnWinner ? 'text-greens-800 bg-greens-100/50 font-bold' : 'text-greens-650'}`}>
+                          {r.grnPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.grn})</span>
+                        </td>
+                        <td className={`px-5 py-3 font-mono ${isAlpWinner ? 'text-red-800 bg-red-100/50 font-bold' : 'text-red-650'}`}>
+                          {r.alpPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.alp})</span>
+                        </td>
+                        <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
+                          {r.lnpPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
+                        </td>
+                        <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-900 bg-slate-200/70 font-bold' : 'text-slate-450'}`}>
+                          {r.othPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
+                        </td>
+                        <td className="px-5 py-3 text-right font-mono text-slate-500">
+                          {r.total.toLocaleString()}
+                        </td>
+                      </tr>
+                    );
+                  });
+                } else {
+                  return (
+                    <tr key={election.id} className="hover:bg-slate-50/50">
+                      <td className="px-5 py-4">
+                        <div className="font-semibold text-slate-800">
+                          <Link to={`/election/${election.id}`} className="hover:text-greens-600 transition-colors">
+                            {election.name}
+                          </Link>
+                        </div>
+                        <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+                          <span>{election.date}</span>
+                        </div>
+                      </td>
+                      <td colSpan={5} className="px-5 py-4 text-slate-450 italic font-medium text-center">
+                        Booth did not exist for this election
+                      </td>
+                    </tr>
+                  );
+                }
               })}
             </tbody>
           </table>

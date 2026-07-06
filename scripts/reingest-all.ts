@@ -11,6 +11,7 @@ booths.forEach(b => {
     r.electionId !== '2023-state' &&
     r.electionId !== '2019-state' &&
     r.electionId !== '2015-state' &&
+    r.electionId !== '2014-state-by-elections' &&
     r.electionId !== '2014-by-election-charlestown' &&
     r.electionId !== '2014-by-election-newcastle' &&
     !(r.electionId === '2024-lake-macquarie-local' && r.contestName === 'Mayor') &&
@@ -752,17 +753,17 @@ raw2014Charlestown.split('\n').forEach(line => {
   const lnp = 0;
   const oth = armsInd + skyInd + wrightsonOth + cubisInd + martinOth + tuckerCdp + hopeInd;
 
-  addResult(name, "ordinary", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", grn, alp, lnp, oth, total);
+  addResult(name, "ordinary", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", grn, alp, lnp, oth, total);
 });
 
 // Manual specials mapping for 2014 Charlestown
-addResult("Absent (Charlestown)", "absent", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 86, 153, 0, 30 + 19 + 18 + 19 + 3 + 15 + 38, 381);
-addResult("Declared Institution (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 0, 2, 0, 1 + 1 + 1 + 0 + 0 + 1 + 1, 7);
-addResult("Enrolment (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 57, 104, 0, 21 + 7 + 15 + 3 + 3 + 7 + 11, 228);
-addResult("Postal (Charlestown)", "postal", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 91, 892, 0, 148 + 55 + 88 + 36 + 38 + 116 + 101, 1565);
-addResult("Pre-poll (Charlestown)", "pre-poll", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 724, 2979, 0, 911 + 200 + 252 + 175 + 83 + 288 + 295, 5907);
-addResult("Provisional/Silent (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 14, 26, 0, 11 + 2 + 2 + 4 + 0 + 8 + 2, 69);
-addResult("iVote (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-by-election-charlestown", "Legislative Assembly", 123, 327, 0, 90 + 35 + 30 + 25 + 21 + 32 + 57, 740);
+addResult("Absent (Charlestown)", "absent", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 86, 153, 0, 30 + 19 + 18 + 19 + 3 + 15 + 38, 381);
+addResult("Declared Institution (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 0, 2, 0, 1 + 1 + 1 + 0 + 0 + 1 + 1, 7);
+addResult("Enrolment (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 57, 104, 0, 21 + 7 + 15 + 3 + 3 + 7 + 11, 228);
+addResult("Postal (Charlestown)", "postal", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 91, 892, 0, 148 + 55 + 88 + 36 + 38 + 116 + 101, 1565);
+addResult("Pre-poll (Charlestown)", "pre-poll", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 724, 2979, 0, 911 + 200 + 252 + 175 + 83 + 288 + 295, 5907);
+addResult("Provisional/Silent (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 14, 26, 0, 11 + 2 + 2 + 4 + 0 + 8 + 2, 69);
+addResult("iVote (Charlestown)", "other-dec", "Charlestown", lgaLakeMac, "2014-state-by-elections", "Legislative Assembly", 123, 327, 0, 90 + 35 + 30 + 25 + 21 + 32 + 57, 740);
 
 
 // 12. 2014 NEWCASTLE BY-ELECTION
@@ -809,17 +810,17 @@ raw2014Newcastle.split('\n').forEach(line => {
   const lnp = 0;
   const oth = obrienSa + hainesInd + stefanacOth + howardInd + caineCdp + buckleyInd;
 
-  addResult(name, "ordinary", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", grn, alp, lnp, oth, total);
+  addResult(name, "ordinary", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", grn, alp, lnp, oth, total);
 });
 
 // Newcastle 2014 Specials
-addResult("Absent (Newcastle)", "absent", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 58, 75, 0, 5 + 33 + 13 + 30 + 5 + 6, 225);
-addResult("Declared Institution (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 8, 36, 0, 7 + 21 + 4 + 8 + 5 + 4, 93);
-addResult("Enrolment (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 93, 129, 0, 12 + 22 + 11 + 74 + 9 + 7, 357);
-addResult("Postal (Newcastle)", "postal", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 107, 620, 0, 22 + 112 + 39 + 181 + 44 + 38, 1163);
-addResult("Pre-poll (Newcastle)", "pre-poll", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 1294, 2283, 0, 129 + 421 + 221 + 2015 + 121 + 150, 6634);
-addResult("Provisional/Silent (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 37, 31, 0, 4 + 9 + 3 + 23 + 1 + 1, 109);
-addResult("iVote (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-by-election-newcastle", "Legislative Assembly", 179, 246, 0, 16 + 88 + 28 + 194 + 19 + 43, 813);
+addResult("Absent (Newcastle)", "absent", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 58, 75, 0, 5 + 33 + 13 + 30 + 5 + 6, 225);
+addResult("Declared Institution (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 8, 36, 0, 7 + 21 + 4 + 8 + 5 + 4, 93);
+addResult("Enrolment (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 93, 129, 0, 12 + 22 + 11 + 74 + 9 + 7, 357);
+addResult("Postal (Newcastle)", "postal", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 107, 620, 0, 22 + 112 + 39 + 181 + 44 + 38, 1163);
+addResult("Pre-poll (Newcastle)", "pre-poll", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 1294, 2283, 0, 129 + 421 + 221 + 2015 + 121 + 150, 6634);
+addResult("Provisional/Silent (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 37, 31, 0, 4 + 9 + 3 + 23 + 1 + 1, 109);
+addResult("iVote (Newcastle)", "other-dec", "Newcastle", lgaNewcastle, "2014-state-by-elections", "Legislative Assembly", 179, 246, 0, 16 + 88 + 28 + 194 + 19 + 43, 813);
 
 
 // 13. 2024 LAKE MACQUARIE MAYORAL ELECTION

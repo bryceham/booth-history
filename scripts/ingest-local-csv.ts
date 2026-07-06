@@ -221,6 +221,7 @@ files.forEach(filename => {
       continue;
     }
 
+    const fullLgaName = lgaName.toLowerCase().includes('lake') ? "Lake Macquarie City Council" : "City of Newcastle";
     const boothType = determineBoothType(rawBoothName);
 
     // Try to find the booth in the existing booths.json
@@ -235,12 +236,17 @@ files.forEach(filename => {
         );
       }
     } else {
-      booth = booths.find(b => b.name.toLowerCase() === rawBoothName.toLowerCase() && b.type === boothType);
+      booth = booths.find(b => 
+        b.name.toLowerCase() === rawBoothName.toLowerCase() && 
+        b.type === boothType && 
+        b.lga === fullLgaName
+      );
       if (!booth) {
         booth = booths.find(b =>
           (b.name.toLowerCase().includes(rawBoothName.toLowerCase()) ||
             rawBoothName.toLowerCase().includes(b.name.toLowerCase())) &&
-          b.type === boothType
+          b.type === boothType &&
+          b.lga === fullLgaName
         );
       }
     }
@@ -294,7 +300,7 @@ files.forEach(filename => {
         id: newBoothId,
         name: rawBoothName,
         division: "Newcastle", // Default current division/electorate
-        lga: rawBoothName.toLowerCase().includes('lake') ? "Lake Macquarie City Council" : "City of Newcastle",
+        lga: fullLgaName,
         lat: -32.9272,
         lng: 151.7761,
         type: boothType === 'ordinary' ? undefined : boothType,

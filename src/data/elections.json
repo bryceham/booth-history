@@ -78,20 +78,12 @@
     "division": "Newcastle"
   },
   {
-    "id": "2014-by-election-charlestown",
-    "name": "2014 Charlestown State By-election",
+    "id": "2014-state-by-elections",
+    "name": "2014 State By-elections",
     "date": "2014-10-25",
     "type": "by-election",
     "parentType": "state",
-    "division": "Charlestown"
-  },
-  {
-    "id": "2014-by-election-newcastle",
-    "name": "2014 Newcastle State By-election",
-    "date": "2014-10-25",
-    "type": "by-election",
-    "parentType": "state",
-    "division": "Newcastle"
+    "division": "Charlestown, Newcastle"
   },
   {
     "id": "2021-local-newcastle",

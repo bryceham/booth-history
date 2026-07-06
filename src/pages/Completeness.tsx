@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Check, X, ShieldAlert, Database } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import boothsData from '../data/booths.json';
+import { getGroupedBooths } from '../utils';
 import electionsData from '../data/elections.json';
-import type { PollingPlace, Election } from '../types';
+import type { Election } from '../types';
 
 export default function Completeness() {
   const [showSpecialCategories, setShowSpecialCategories] = useState(false);
@@ -11,7 +11,7 @@ export default function Completeness() {
 
   // Filter booths by category
   const filteredBooths = useMemo(() => {
-    return (boothsData as PollingPlace[]).filter(booth => {
+    return getGroupedBooths().filter(booth => {
       if (!showSpecialCategories && booth.type && booth.type !== 'ordinary') {
         return false;
       }

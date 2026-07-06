@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpDown, Award, Filter, Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpDown, ArrowUp, ArrowDown, Award, Filter, Search, ChevronLeft, ChevronRight } from 'lucide-react';
 // import {
 //   ResponsiveContainer,
 //   LineChart,
@@ -31,6 +31,24 @@ type LeaderboardRow = {
   boothType?: string;
   swing: number | null;
   divisionChanged: boolean;
+};
+
+const getElectionDisplayName = (row: LeaderboardRow) => {
+  const isLocal = row.electionType === 'local' || 
+                  row.electionName.toLowerCase().includes('local') || 
+                  row.electionName.toLowerCase().includes('mayor');
+  if (isLocal) {
+    if (row.contestName.toLowerCase().includes('mayor') || row.contestName.toLowerCase().includes('mayoral')) {
+      if (row.electionName.toLowerCase().includes('mayor') || row.electionName.toLowerCase().includes('mayoral')) {
+        return row.electionName;
+      }
+      return `Mayor - ${row.electionName}`;
+    }
+    if (row.division && row.division.toLowerCase().includes('ward')) {
+      return `${row.division} - ${row.electionName}`;
+    }
+  }
+  return row.electionName;
 };
 
 export default function Leaderboard() {
@@ -124,19 +142,6 @@ export default function Leaderboard() {
     return rows;
   }, [electionsMap, showSpecialCategories]);
 
-  // Detect booths with multiple contests in the same election
-  const multiContestKeys = useMemo(() => {
-    const counts = new Map<string, number>();
-    flatData.forEach(r => {
-      const key = `${r.boothId}||${r.electionId}`;
-      counts.set(key, (counts.get(key) ?? 0) + 1);
-    });
-    const set = new Set<string>();
-    counts.forEach((count, key) => {
-      if (count > 1) set.add(key);
-    });
-    return set;
-  }, [flatData]);
 
   // List of unique LGAs for filter dropdown
   const lgas = useMemo(() => {
@@ -162,7 +167,7 @@ export default function Leaderboard() {
       const matchesYearMin = yearMin ? year >= parseInt(yearMin) : true;
       const matchesYearMax = yearMax ? year <= parseInt(yearMax) : true;
 
-      const matchesSmallBooths = !hideSmallBooths || row.totalVotes >= 100;
+      const matchesSmallBooths = !hideSmallBooths || row.totalVotes >= 250;
 
       return matchesType && matchesLga && matchesDivision && matchesBooth && matchesYearMin && matchesYearMax && matchesSmallBooths;
     });
@@ -243,7 +248,7 @@ export default function Leaderboard() {
           <Award className="w-8 h-8 text-yellow-600" />
           Booth Leaderboard
         </h1>
-        <p className="text-slate-600 text-sm max-w-xl">
+        <p className="text-slate-600 text-sm max-w-3xl">
           Historical rank of all booths in Newcastle and Lake Macquarie based on Greens first preference percentage.
         </p>
       </div>
@@ -348,7 +353,7 @@ export default function Leaderboard() {
               className="w-4 h-4 text-greens-600 border-slate-300 rounded focus:ring-greens-500 cursor-pointer"
             />
             <label htmlFor="hide-small-booths" className="text-xs font-semibold text-slate-655 cursor-pointer">
-              Hide small booths (&lt; 100 formal votes)
+              Hide small booths (&lt; 250 formal votes)
             </label>
           </div>
           <div className="flex items-center gap-2 select-none">
@@ -436,33 +441,69 @@ export default function Leaderboard() {
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold text-xs uppercase tracking-wider">
               <tr>
-                <th className="px-5 py-3.5 w-14">Rank</th>
-                <th className="px-5 py-3.5">Booth / Election</th>
-                <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-greens-700"
+                <th className="px-5 py-3.5 w-14 whitespace-nowrap">Rank</th>
+                <th className="px-5 py-3.5 w-full">Booth / Election</th>
+                 <th
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-24 md:w-28 ${
+                    sortField === 'percentage'
+                      ? 'bg-greens-50/50 text-greens-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-greens-700'
+                  }`}
                   onClick={() => handleSort('percentage')}
                 >
                   <div className="flex items-center gap-1">
                     <span>Greens %</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'percentage' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-greens-600" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-greens-600" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
                 <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-greens-700"
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-28 md:w-32 ${
+                    sortField === 'votes'
+                      ? 'bg-greens-50/50 text-greens-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-greens-700'
+                  }`}
                   onClick={() => handleSort('votes')}
                 >
                   <div className="flex items-center gap-1">
                     <span>Greens Votes</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'votes' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-greens-600" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-greens-600" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
                 <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-right"
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-28 md:w-32 ${
+                    sortField === 'totalVotes'
+                      ? 'bg-slate-100 text-slate-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-slate-655'
+                  }`}
                   onClick={() => handleSort('totalVotes')}
                 >
                   <div className="flex items-center justify-end gap-1">
                     <span>Total Votes</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'totalVotes' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-slate-800" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-slate-800" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
               </tr>
@@ -487,8 +528,8 @@ export default function Leaderboard() {
                           {rank}
                         </span>
                       </td>
-                      <td className="px-5 py-4">
-                        <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                      <td className="px-5 py-4 w-full">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-0.5">
                           <Link
                             to={`/booth/${row.boothId}`}
                             className="font-bold text-slate-900 hover:text-greens-600 transition-colors text-sm"
@@ -497,18 +538,13 @@ export default function Leaderboard() {
                           </Link>
                           <span className="text-slate-400 font-mono">-</span>
                           <Link 
-                            to={`/election/${row.electionId}`} 
+                            to={`/election/${row.electionId}?contest=${`${row.contestName}-${row.division}`.toLowerCase().replace(/\s+/g, '-')}`} 
                             className="font-bold text-slate-900 hover:text-greens-600 transition-colors text-sm"
                           >
-                            {row.electionName}
-                            {multiContestKeys.has(`${row.boothId}||${row.electionId}`) && (
-                              <span className="text-slate-500 font-normal">
-                                {` — ${row.contestName} (${row.division})`}
-                              </span>
-                            )}
+                            {getElectionDisplayName(row)}
                           </Link>
                           {row.boothType && row.boothType !== 'ordinary' && (
-                            <span className={`border text-[9px] px-1 py-0.5 rounded font-bold font-mono uppercase tracking-wider ${row.boothType === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                            <span className={`border text-[9px] px-1 py-0.5 rounded font-bold font-mono uppercase tracking-wider whitespace-nowrap ${row.boothType === "pre-poll" ? "bg-amber-50 text-amber-700 border-amber-200" :
                               row.boothType === "postal" ? "bg-blue-50 text-blue-700 border-blue-200" :
                                 row.boothType === "absent" ? "bg-purple-50 text-purple-700 border-purple-200" :
                                   "bg-rose-50 text-rose-700 border-rose-200"
@@ -520,13 +556,19 @@ export default function Leaderboard() {
                           )}
                         </div>
                       </td>
-                      <td className="px-5 py-4 font-mono font-bold text-greens-600 text-base">
-                        {row.greensPercentage}%
+                       <td className={`px-5 py-4 font-mono font-bold text-greens-600 text-base transition-colors whitespace-nowrap ${
+                        sortField === 'percentage' ? 'bg-greens-50/10 font-extrabold' : ''
+                      }`}>
+                        {row.greensPercentage.toFixed(2)}%
                       </td>
-                      <td className="px-5 py-4 font-mono font-semibold text-greens-700">
+                      <td className={`px-5 py-4 font-mono font-semibold text-greens-700 transition-colors whitespace-nowrap ${
+                        sortField === 'votes' ? 'bg-greens-50/10 font-bold' : ''
+                      }`}>
                         {row.greensVotes.toLocaleString()}
                       </td>
-                      <td className="px-5 py-4 text-right font-mono text-slate-500 text-xs">
+                      <td className={`px-5 py-4 text-right font-mono text-slate-500 text-xs transition-colors whitespace-nowrap ${
+                        sortField === 'totalVotes' ? 'bg-slate-50/30' : ''
+                      }`}>
                         {row.totalVotes.toLocaleString()}
                       </td>
                     </tr>

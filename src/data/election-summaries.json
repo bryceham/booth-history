@@ -672,9 +672,9 @@
     "grnSwing": null
   },
   {
-    "id": "2014-by-election-newcastle||Legislative Assembly||Newcastle",
-    "electionId": "2014-by-election-newcastle",
-    "electionName": "2014 Newcastle State By-election",
+    "id": "2014-state-by-elections||Legislative Assembly||Newcastle",
+    "electionId": "2014-state-by-elections",
+    "electionName": "2014 State By-elections",
     "electionType": "by-election",
     "electionDate": "2014-10-25",
     "electionYear": 2014,
@@ -693,9 +693,9 @@
     "grnSwing": null
   },
   {
-    "id": "2014-by-election-charlestown||Legislative Assembly||Charlestown",
-    "electionId": "2014-by-election-charlestown",
-    "electionName": "2014 Charlestown State By-election",
+    "id": "2014-state-by-elections||Legislative Assembly||Charlestown",
+    "electionId": "2014-state-by-elections",
+    "electionName": "2014 State By-elections",
     "electionType": "by-election",
     "electionDate": "2014-10-25",
     "electionYear": 2014,

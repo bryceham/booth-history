@@ -49,6 +49,50 @@ if (sourceGroup.slug === targetGroup.slug) {
   process.exit(1);
 }
 
+// Block merge if there is duplicate data (i.e. both groups contain results for the same contest in the same election)
+const boothsPath = path.resolve(import.meta.dirname || '.', '../src/data/booths.json');
+if (!fs.existsSync(boothsPath)) {
+  console.error(`Booths database file not found at: ${boothsPath}`);
+  process.exit(1);
+}
+
+let booths: any[] = [];
+try {
+  booths = JSON.parse(fs.readFileSync(boothsPath, 'utf-8'));
+} catch (e) {
+  console.error('Failed to parse booths.json', e);
+  process.exit(1);
+}
+
+const sourceBooths = booths.filter(b => sourceGroup.rawNames.includes(b.name));
+const targetBooths = booths.filter(b => targetGroup.rawNames.includes(b.name));
+
+const sourceContests = new Set<string>();
+sourceBooths.forEach(b => {
+  b.results.forEach((r: any) => {
+    const key = `${r.electionId}||${r.contestName}||${r.division || ''}`;
+    sourceContests.add(key);
+  });
+});
+
+const duplicateContests: string[] = [];
+targetBooths.forEach(b => {
+  b.results.forEach((r: any) => {
+    const key = `${r.electionId}||${r.contestName}||${r.division || ''}`;
+    if (sourceContests.has(key)) {
+      duplicateContests.push(`${r.electionId} - ${r.contestName} (${r.division || 'default division'})`);
+    }
+  });
+});
+
+if (duplicateContests.length > 0) {
+  console.error('Error: Cannot merge booth groups. Duplicate election/contest data found:');
+  const uniqueDuplicates = Array.from(new Set(duplicateContests));
+  uniqueDuplicates.forEach(d => console.error(`  - ${d}`));
+  console.error('This indicates they are different physical booths and should not be merged.');
+  process.exit(1);
+}
+
 // Merge rawNames from source into target, keeping unique entries
 const uniqueRawNames = new Set([...targetGroup.rawNames, ...sourceGroup.rawNames]);
 targetGroup.rawNames = Array.from(uniqueRawNames);

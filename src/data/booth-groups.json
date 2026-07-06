@@ -1,12 +1,5 @@
 [
   {
-    "slug": "adamstown-snr-ctzn-cntr",
-    "displayName": "Adamstown Snr Ctzn Cntr",
-    "rawNames": [
-      "Adamstown Snr Ctzn Cntr"
-    ]
-  },
-  {
     "slug": "beresfield-public",
     "displayName": "Beresfield Public",
     "rawNames": [
@@ -32,13 +25,6 @@
     "displayName": "Callaghan Cllg - Waratah Tech",
     "rawNames": [
       "Callaghan Cllg - Waratah Tech"
-    ]
-  },
-  {
-    "slug": "carrington-public",
-    "displayName": "Carrington Public",
-    "rawNames": [
-      "Carrington Public"
     ]
   },
   {
@@ -70,13 +56,6 @@
     ]
   },
   {
-    "slug": "hamilton-public",
-    "displayName": "Hamilton Public",
-    "rawNames": [
-      "Hamilton Public"
-    ]
-  },
-  {
     "slug": "hamilton-sth-comm-hall",
     "displayName": "Hamilton Sth Comm. Hall",
     "rawNames": [
@@ -105,13 +84,6 @@
     ]
   },
   {
-    "slug": "kotara-high",
-    "displayName": "Kotara High",
-    "rawNames": [
-      "Kotara High"
-    ]
-  },
-  {
     "slug": "kotara-sth-public",
     "displayName": "Kotara Sth Public",
     "rawNames": [
@@ -137,34 +109,6 @@
     "displayName": "Maryland Public",
     "rawNames": [
       "Maryland Public"
-    ]
-  },
-  {
-    "slug": "mayfield-baptist",
-    "displayName": "Mayfield Baptist",
-    "rawNames": [
-      "Mayfield Baptist"
-    ]
-  },
-  {
-    "slug": "mayfield-church-of-christ",
-    "displayName": "Mayfield Church of Christ",
-    "rawNames": [
-      "Mayfield Church of Christ"
-    ]
-  },
-  {
-    "slug": "mayfield-e-public",
-    "displayName": "Mayfield E Public",
-    "rawNames": [
-      "Mayfield E Public"
-    ]
-  },
-  {
-    "slug": "mayfield-presbyterian",
-    "displayName": "Mayfield Presbyterian",
-    "rawNames": [
-      "Mayfield Presbyterian"
     ]
   },
   {
@@ -203,27 +147,6 @@
     ]
   },
   {
-    "slug": "newcastle-city-hall",
-    "displayName": "Newcastle City Hall",
-    "rawNames": [
-      "Newcastle City Hall"
-    ]
-  },
-  {
-    "slug": "newcastle-city-scout-hall",
-    "displayName": "Newcastle City Scout Hall",
-    "rawNames": [
-      "Newcastle City Scout Hall"
-    ]
-  },
-  {
-    "slug": "newcastle-e-public",
-    "displayName": "Newcastle E Public",
-    "rawNames": [
-      "Newcastle E Public"
-    ]
-  },
-  {
     "slug": "our-lady-of-victories-shortland",
     "displayName": "Our Lady of Victories Shortland",
     "rawNames": [
@@ -242,20 +165,6 @@
     "displayName": "St Augustine's Anglican",
     "rawNames": [
       "St Augustine's Anglican"
-    ]
-  },
-  {
-    "slug": "st-columba-s-adamstown",
-    "displayName": "St Columba's Adamstown",
-    "rawNames": [
-      "St Columba's Adamstown"
-    ]
-  },
-  {
-    "slug": "st-johns-cooks-hill",
-    "displayName": "St Johns Cooks Hill",
-    "rawNames": [
-      "St Johns Cooks Hill"
     ]
   },
   {
@@ -291,13 +200,6 @@
     "displayName": "Tarro Hall",
     "rawNames": [
       "Tarro Hall"
-    ]
-  },
-  {
-    "slug": "the-junction-public",
-    "displayName": "The Junction Public",
-    "rawNames": [
-      "The Junction Public"
     ]
   },
   {
@@ -413,34 +315,6 @@
     ]
   },
   {
-    "slug": "charlestown-e-public",
-    "displayName": "Charlestown E Public",
-    "rawNames": [
-      "Charlestown E Public"
-    ]
-  },
-  {
-    "slug": "charlestown-public",
-    "displayName": "Charlestown Public",
-    "rawNames": [
-      "Charlestown Public"
-    ]
-  },
-  {
-    "slug": "charlestown-sth-public",
-    "displayName": "Charlestown Sth Public",
-    "rawNames": [
-      "Charlestown Sth Public"
-    ]
-  },
-  {
-    "slug": "dudley-pensioners-hall",
-    "displayName": "Dudley Pensioners Hall",
-    "rawNames": [
-      "Dudley Pensioners Hall"
-    ]
-  },
-  {
     "slug": "eleebana-public",
     "displayName": "Eleebana Public",
     "rawNames": [
@@ -452,13 +326,6 @@
     "displayName": "Floraville Public",
     "rawNames": [
       "Floraville Public"
-    ]
-  },
-  {
-    "slug": "garden-suburb-public",
-    "displayName": "Garden Suburb Public",
-    "rawNames": [
-      "Garden Suburb Public"
     ]
   },
   {
@@ -665,27 +532,6 @@
     ]
   },
   {
-    "slug": "goodlife-church-wickham",
-    "displayName": "Goodlife Church Wickham",
-    "rawNames": [
-      "Goodlife Church Wickham"
-    ]
-  },
-  {
-    "slug": "st-andrews-mayfield",
-    "displayName": "St Andrews Mayfield",
-    "rawNames": [
-      "St Andrews Mayfield"
-    ]
-  },
-  {
-    "slug": "wea-hunter-laman-st-campus",
-    "displayName": "WEA Hunter Laman St Campus",
-    "rawNames": [
-      "WEA Hunter Laman St Campus"
-    ]
-  },
-  {
     "slug": "newcastle-west-evc",
     "displayName": "Newcastle West EVC",
     "rawNames": [
@@ -746,13 +592,6 @@
     "displayName": "Holy Family Merewether",
     "rawNames": [
       "Holy Family Merewether"
-    ]
-  },
-  {
-    "slug": "mayfield-w-public",
-    "displayName": "Mayfield W Public",
-    "rawNames": [
-      "Mayfield W Public"
     ]
   },
   {
@@ -1302,38 +1141,10 @@
     ]
   },
   {
-    "slug": "declared-institution-north-ward",
-    "displayName": "Declared Institution (North Ward)",
-    "rawNames": [
-      "Declared Institution (North Ward)"
-    ]
-  },
-  {
-    "slug": "provisional-north-ward",
-    "displayName": "Provisional (North Ward)",
-    "rawNames": [
-      "Provisional (North Ward)"
-    ]
-  },
-  {
-    "slug": "postal-north-ward",
-    "displayName": "Postal (North Ward)",
-    "rawNames": [
-      "Postal (North Ward)"
-    ]
-  },
-  {
     "slug": "hmc-waratah",
     "displayName": "HMC Waratah",
     "rawNames": [
       "HMC Waratah"
-    ]
-  },
-  {
-    "slug": "newcastle-school",
-    "displayName": "Newcastle School",
-    "rawNames": [
-      "Newcastle School"
     ]
   },
   {
@@ -1376,13 +1187,6 @@
     "displayName": "Jesmond Public",
     "rawNames": [
       "Jesmond Public"
-    ]
-  },
-  {
-    "slug": "enrolment-provisional",
-    "displayName": "Enrolment/Provisional",
-    "rawNames": [
-      "Enrolment/Provisional"
     ]
   },
   {
@@ -1475,7 +1279,9 @@
     "slug": "mayfield",
     "displayName": "Mayfield",
     "rawNames": [
-      "Mayfield"
+      "Mayfield",
+      "Mayfield Baptist",
+      "St Andrews Mayfield"
     ]
   },
   {
@@ -1524,14 +1330,19 @@
     "slug": "wickham",
     "displayName": "Wickham",
     "rawNames": [
-      "Wickham"
+      "Wickham",
+      "Newcastle City Scout Hall",
+      "Goodlife Church Wickham",
+      "Maryville Wickham"
     ]
   },
   {
     "slug": "mayfield-west",
     "displayName": "Mayfield West",
     "rawNames": [
-      "Mayfield West"
+      "Mayfield West",
+      "Mayfield W Public",
+      "Mayfield Church of Christ"
     ]
   },
   {
@@ -1545,7 +1356,10 @@
     "slug": "cooks-hill",
     "displayName": "Cooks Hill",
     "rawNames": [
-      "Cooks Hill"
+      "Cooks Hill",
+      "Newcastle School",
+      "WEA Hunter Laman St Campus",
+      "Newcastle City Hall"
     ]
   },
   {
@@ -1559,7 +1373,8 @@
     "slug": "mayfield-south",
     "displayName": "Mayfield South",
     "rawNames": [
-      "Mayfield South"
+      "Mayfield South",
+      "Mayfield Presbyterian"
     ]
   },
   {
@@ -1628,9 +1443,11 @@
   },
   {
     "slug": "adamstown-heights-newcastle",
-    "displayName": "Adamstown Heights (Newcastle)",
+    "displayName": "Adamstown Heights",
     "rawNames": [
-      "Adamstown Heights (Newcastle)"
+      "Adamstown Heights (Newcastle)",
+      "Kotara High",
+      "Adamstown Heights (Shortland)"
     ]
   },
   {
@@ -1665,21 +1482,24 @@
     "slug": "carrington",
     "displayName": "Carrington",
     "rawNames": [
-      "Carrington"
+      "Carrington",
+      "Carrington Public"
     ]
   },
   {
     "slug": "adamstown-north",
     "displayName": "Adamstown North",
     "rawNames": [
-      "Adamstown North"
+      "Adamstown North",
+      "Adamstown Snr Ctzn Cntr"
     ]
   },
   {
     "slug": "newcastle-city",
     "displayName": "Newcastle City",
     "rawNames": [
-      "Newcastle City"
+      "Newcastle City",
+      "Newcastle E Public"
     ]
   },
   {
@@ -1707,14 +1527,17 @@
     "slug": "cooks-hill-south",
     "displayName": "Cooks Hill South",
     "rawNames": [
-      "Cooks Hill South"
+      "Cooks Hill South",
+      "St Johns Cooks Hill"
     ]
   },
   {
     "slug": "adamstown-south",
     "displayName": "Adamstown South",
     "rawNames": [
-      "Adamstown South"
+      "Adamstown South",
+      "St Columba's Adamstown",
+      "Adamstown"
     ]
   },
   {
@@ -1735,7 +1558,8 @@
     "slug": "mayfield-east",
     "displayName": "Mayfield East",
     "rawNames": [
-      "Mayfield East"
+      "Mayfield East",
+      "Mayfield E Public"
     ]
   },
   {
@@ -1756,14 +1580,16 @@
     "slug": "the-junction",
     "displayName": "The Junction",
     "rawNames": [
-      "The Junction"
+      "The Junction",
+      "The Junction Public"
     ]
   },
   {
     "slug": "hamilton",
     "displayName": "Hamilton",
     "rawNames": [
-      "Hamilton"
+      "Hamilton",
+      "Hamilton Public"
     ]
   },
   {
@@ -1778,13 +1604,6 @@
     "displayName": "Mayfield NEWCASTLE PPVC",
     "rawNames": [
       "Mayfield NEWCASTLE PPVC"
-    ]
-  },
-  {
-    "slug": "postal",
-    "displayName": "Postal",
-    "rawNames": [
-      "Postal"
     ]
   },
   {
@@ -1806,13 +1625,6 @@
     "displayName": "Lambton Pre-Poll",
     "rawNames": [
       "Lambton Pre-Poll"
-    ]
-  },
-  {
-    "slug": "adamstown",
-    "displayName": "Adamstown",
-    "rawNames": [
-      "Adamstown"
     ]
   },
   {
@@ -1876,13 +1688,6 @@
     "displayName": "Lambton (Newcastle)",
     "rawNames": [
       "Lambton (Newcastle)"
-    ]
-  },
-  {
-    "slug": "maryville-wickham",
-    "displayName": "Maryville Wickham",
-    "rawNames": [
-      "Maryville Wickham"
     ]
   },
   {
@@ -1953,13 +1758,6 @@
     "displayName": "Woodberry",
     "rawNames": [
       "Woodberry"
-    ]
-  },
-  {
-    "slug": "adamstown-heights-shortland",
-    "displayName": "Adamstown Heights (Shortland)",
-    "rawNames": [
-      "Adamstown Heights (Shortland)"
     ]
   },
   {
@@ -2043,14 +1841,16 @@
     "slug": "charlestown",
     "displayName": "Charlestown",
     "rawNames": [
-      "Charlestown"
+      "Charlestown",
+      "Charlestown Public"
     ]
   },
   {
     "slug": "charlestown-east",
     "displayName": "Charlestown East",
     "rawNames": [
-      "Charlestown East"
+      "Charlestown East",
+      "Charlestown E Public"
     ]
   },
   {
@@ -2064,7 +1864,8 @@
     "slug": "charlestown-south",
     "displayName": "Charlestown South",
     "rawNames": [
-      "Charlestown South"
+      "Charlestown South",
+      "Charlestown Sth Public"
     ]
   },
   {
@@ -2085,7 +1886,8 @@
     "slug": "dudley",
     "displayName": "Dudley",
     "rawNames": [
-      "Dudley"
+      "Dudley",
+      "Dudley Pensioners Hall"
     ]
   },
   {
@@ -2353,7 +2155,8 @@
     "slug": "garden-suburb",
     "displayName": "Garden Suburb",
     "rawNames": [
-      "Garden Suburb"
+      "Garden Suburb",
+      "Garden Suburb Public"
     ]
   },
   {
@@ -2515,6 +2318,41 @@
     "displayName": "Swansea PPVC",
     "rawNames": [
       "Swansea PPVC"
+    ]
+  },
+  {
+    "slug": "enrolment-provisional",
+    "displayName": "Enrolment/Provisional",
+    "rawNames": [
+      "Enrolment/Provisional"
+    ]
+  },
+  {
+    "slug": "declared-institution-north-ward",
+    "displayName": "Declared Institution (North Ward)",
+    "rawNames": [
+      "Declared Institution (North Ward)"
+    ]
+  },
+  {
+    "slug": "provisional-north-ward",
+    "displayName": "Provisional (North Ward)",
+    "rawNames": [
+      "Provisional (North Ward)"
+    ]
+  },
+  {
+    "slug": "postal-north-ward",
+    "displayName": "Postal (North Ward)",
+    "rawNames": [
+      "Postal (North Ward)"
+    ]
+  },
+  {
+    "slug": "postal",
+    "displayName": "Postal",
+    "rawNames": [
+      "Postal"
     ]
   }
 ]

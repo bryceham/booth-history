@@ -262,7 +262,7 @@ export default function ElectionDetail() {
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-slate-700">{party.label}</span>
                     <span className="font-mono">
-                      <strong className={party.text}>{party.pct}%</strong> • {party.votes.toLocaleString()} votes
+                      <strong className={party.text}>{party.pct.toFixed(2)}%</strong> • {party.votes.toLocaleString()} votes
                     </span>
                   </div>
                   <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
@@ -292,7 +292,7 @@ export default function ElectionDetail() {
                     )}
                   </div>
                   <div className="text-right shrink-0">
-                    <div className="text-sm font-mono font-extrabold text-greens-600">{tb.grnPct}%</div>
+                    <div className="text-sm font-mono font-extrabold text-greens-600">{tb.grnPct.toFixed(2)}%</div>
                     <div className="text-[9px] text-slate-400 mt-0.5">{tb.grn.toLocaleString()} votes</div>
                   </div>
                 </div>
@@ -378,17 +378,17 @@ export default function ElectionDetail() {
                           <div className="text-[10px] text-slate-450 mt-0.5">{r.booth.name}</div>
                         )}
                       </td>
-                      <td className={`px-5 py-3 font-mono font-bold ${isGrnWinner ? 'text-greens-800 bg-greens-100/50' : 'text-greens-650'}`}>
-                        {r.grnPct}% <span className="text-[10px] font-normal text-slate-400">({r.grn})</span>
+                      <td className={`px-5 py-3 font-mono ${isGrnWinner ? 'text-greens-800 bg-greens-100/50 font-bold' : 'text-greens-650'}`}>
+                        {r.grnPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.grn})</span>
                       </td>
                       <td className={`px-5 py-3 font-mono ${isAlpWinner ? 'text-red-800 bg-red-100/50 font-bold' : 'text-red-650'}`}>
-                        {r.alpPct}% <span className="text-[10px] font-normal text-slate-400">({r.alp})</span>
+                        {r.alpPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.alp})</span>
                       </td>
                       <td className={`px-5 py-3 font-mono ${isLnpWinner ? 'text-blue-800 bg-blue-100/50 font-bold' : 'text-blue-650'}`}>
-                        {r.lnpPct}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
+                        {r.lnpPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.lnp})</span>
                       </td>
                       <td className={`px-5 py-3 font-mono ${isOthWinner ? 'text-slate-900 bg-slate-200/70 font-bold' : 'text-slate-450'}`}>
-                        {r.othPct}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
+                        {r.othPct.toFixed(2)}% <span className="text-[10px] font-normal text-slate-400">({r.oth})</span>
                       </td>
                       <td className="px-5 py-3 text-right font-mono text-slate-500">
                         {r.total.toLocaleString()}

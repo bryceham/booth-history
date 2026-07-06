@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpDown, BarChart3, Filter } from 'lucide-react';
+import { ArrowUpDown, ArrowUp, ArrowDown, BarChart3, Filter } from 'lucide-react';
 import summariesData from '../data/election-summaries.json';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -119,7 +119,7 @@ export default function ElectionLeaderboard() {
           <BarChart3 className="w-8 h-8 text-greens-600" />
           Elections Leaderboard
         </h1>
-        <p className="text-slate-600 text-sm max-w-xl">
+        <p className="text-slate-600 text-sm max-w-3xl">
           Aggregated Greens first-preference totals per election contest, ranked across all elections.
         </p>
       </div>
@@ -191,36 +191,72 @@ export default function ElectionLeaderboard() {
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold text-xs uppercase tracking-wider">
               <tr>
-                <th className="px-5 py-3.5 w-14">Rank</th>
-                <th className="px-5 py-3.5">Election / Contest</th>
+                <th className="px-5 py-3.5 w-14 whitespace-nowrap">Rank</th>
+                <th className="px-5 py-3.5 w-full">Election / Contest</th>
 
                 <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-greens-700"
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-24 md:w-28 ${
+                    sortField === 'grnPct'
+                      ? 'bg-greens-50/50 text-greens-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-greens-700'
+                  }`}
                   onClick={() => handleSort('grnPct')}
                 >
                   <div className="flex items-center gap-1">
                     <span>Greens %</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'grnPct' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-greens-600" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-greens-600" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
 
                 <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-greens-700"
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-28 md:w-32 ${
+                    sortField === 'grnVotes'
+                      ? 'bg-greens-50/50 text-greens-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-greens-700'
+                  }`}
                   onClick={() => handleSort('grnVotes')}
                 >
                   <div className="flex items-center gap-1">
                     <span>Greens Votes</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'grnVotes' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-greens-600" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-greens-600" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
 
                 <th
-                  className="px-5 py-3.5 cursor-pointer hover:bg-slate-100/60 text-right"
+                  className={`px-5 py-3.5 cursor-pointer transition-colors select-none whitespace-nowrap w-28 md:w-32 ${
+                    sortField === 'totalVotes'
+                      ? 'bg-slate-100 text-slate-900 font-bold'
+                      : 'hover:bg-slate-100/60 text-slate-600'
+                  }`}
                   onClick={() => handleSort('totalVotes')}
                 >
                   <div className="flex items-center justify-end gap-1">
                     <span>Total Votes</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+                    {sortField === 'totalVotes' ? (
+                      sortOrder === 'asc' ? (
+                        <ArrowUp className="w-3.5 h-3.5 text-slate-800" />
+                      ) : (
+                        <ArrowDown className="w-3.5 h-3.5 text-slate-800" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 opacity-60" />
+                    )}
                   </div>
                 </th>
               </tr>
@@ -247,10 +283,10 @@ export default function ElectionLeaderboard() {
                       </td>
 
                       {/* Election / Contest */}
-                      <td className="px-5 py-4">
-                        <div className="flex flex-wrap items-center gap-2 mb-0.5">
+                      <td className="px-5 py-4 w-full">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-0.5">
                           <Link
-                            to={`/election/${row.electionId}`}
+                            to={`/election/${row.electionId}?contest=${`${row.contestName}-${row.division}`.toLowerCase().replace(/\s+/g, '-')}`}
                             className="font-bold text-slate-900 hover:text-greens-600 transition-colors text-sm"
                           >
                             {multiDivisionIds.has(row.electionId)
@@ -267,17 +303,23 @@ export default function ElectionLeaderboard() {
                       </td>
 
                       {/* Greens % */}
-                      <td className="px-5 py-4 font-mono font-bold text-greens-600 text-base">
-                        {row.grnPct}%
+                      <td className={`px-5 py-4 font-mono font-bold text-greens-600 text-base transition-colors whitespace-nowrap ${
+                        sortField === 'grnPct' ? 'bg-greens-50/10 font-extrabold' : ''
+                      }`}>
+                        {row.grnPct.toFixed(2)}%
                       </td>
 
                       {/* Greens Votes */}
-                      <td className="px-5 py-4 font-mono font-semibold text-greens-700">
+                      <td className={`px-5 py-4 font-mono font-semibold text-greens-700 transition-colors whitespace-nowrap ${
+                        sortField === 'grnVotes' ? 'bg-greens-50/10 font-bold' : ''
+                      }`}>
                         {row.grnVotes.toLocaleString()}
                       </td>
 
                       {/* Total Votes */}
-                      <td className="px-5 py-4 text-right font-mono text-slate-500 text-xs">
+                      <td className={`px-5 py-4 text-right font-mono text-slate-500 text-xs transition-colors whitespace-nowrap ${
+                        sortField === 'totalVotes' ? 'bg-slate-50/30' : ''
+                      }`}>
                         {row.totalVotes.toLocaleString()}
                       </td>
                     </tr>
