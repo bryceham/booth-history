@@ -47,7 +47,7 @@ export default function ElectionDetail() {
       if (!aIsMayor && bIsMayor) return 1;
       return a.division.localeCompare(b.division);
     });
-  }, [id]);
+  }, [id, election]);
 
   const selectedContestIdx = useMemo(() => {
     if (!activeContestKey) return 0;
@@ -111,7 +111,7 @@ export default function ElectionDetail() {
     });
 
     return list;
-  }, [id, activeContest]);
+  }, [id, activeContest, election]);
 
   // Filter booth results based on special categories toggle
   const divisionBoothResults = useMemo(() => {

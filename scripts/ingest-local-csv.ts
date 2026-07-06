@@ -150,14 +150,21 @@ files.forEach(filename => {
     const partyCol = row[2];
 
     // Check if it's a metadata row
+    const isUngroupedHeader =
+      candidateCol.includes('UNGROUPED CANDIDATES') ||
+      partyCol.includes('UNGROUPED CANDIDATES');
+
     const isMetadata =
       candidateCol.includes('Total Formal Votes') ||
       candidateCol.includes('Total Informal Ballot Papers') ||
       candidateCol.includes('Total Votes / Ballot Papers') ||
-      candidateCol.includes('UNGROUPED CANDIDATES') ||
-      partyCol.includes('UNGROUPED CANDIDATES');
+      isUngroupedHeader;
 
     if (isMetadata) {
+      if (isUngroupedHeader) {
+        currentGroup = '';
+        currentPartyCode = 'OTH';
+      }
       if (candidateCol.includes('Total Formal Votes')) {
         for (let c = boothColsStart; c <= boothColsEnd; c++) {
           const boothName = headers[c];

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { PollingPlace, ContestResult } from '../src/types';
+import type { PollingPlace } from '../src/types';
 
 const boothsPath = path.resolve(import.meta.dirname || '.', '../src/data/booths.json');
 let booths: PollingPlace[] = JSON.parse(fs.readFileSync(boothsPath, 'utf-8'));

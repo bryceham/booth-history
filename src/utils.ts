@@ -2,11 +2,17 @@ import boothsData from './data/booths.json';
 import boothGroupsData from './data/booth-groups.json';
 import type { PollingPlace, BoothGroup } from './types';
 
+let cachedGroupedBooths: PollingPlace[] | null = null;
+
 export function getGroupedBooths(): PollingPlace[] {
+  if (cachedGroupedBooths) {
+    return cachedGroupedBooths;
+  }
+
   const booths = boothsData as PollingPlace[];
   const groups = boothGroupsData as BoothGroup[];
   
-  return groups.map(group => {
+  cachedGroupedBooths = groups.map(group => {
     const rawBooths = booths.filter(b => group.rawNames.includes(b.name));
     const combinedResults = rawBooths.flatMap(b => b.results.map(r => ({ ...r, boothName: b.name })));
     
@@ -36,4 +42,6 @@ export function getGroupedBooths(): PollingPlace[] {
       rawNames: group.rawNames
     } as PollingPlace;
   });
+
+  return cachedGroupedBooths;
 }

@@ -210,13 +210,9 @@ export default function Leaderboard() {
       } else if (sortField === 'year') {
         comparison = a.electionYear - b.electionYear;
       } else if (sortField === 'votes') {
-        const votesA = parseInt(String(a.greensVotes || '').replace(/,/g, '')) || 0;
-        const votesB = parseInt(String(b.greensVotes || '').replace(/,/g, '')) || 0;
-        comparison = votesA - votesB;
+        comparison = (a.greensVotes || 0) - (b.greensVotes || 0);
       } else if (sortField === 'totalVotes') {
-        const totalA = parseInt(String(a.totalVotes || '').replace(/,/g, '')) || 0;
-        const totalB = parseInt(String(b.totalVotes || '').replace(/,/g, '')) || 0;
-        comparison = totalA - totalB;
+        comparison = (a.totalVotes || 0) - (b.totalVotes || 0);
       }
 
       return sortOrder === 'desc' ? -comparison : comparison;
