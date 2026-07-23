@@ -28,13 +28,6 @@
     ]
   },
   {
-    "slug": "kotara-sth-public",
-    "displayName": "Kotara Sth Public",
-    "rawNames": [
-      "Kotara Sth Public"
-    ]
-  },
-  {
     "slug": "maryland-public",
     "displayName": "Maryland Public",
     "rawNames": [
@@ -60,13 +53,6 @@
     "displayName": "Shortland Public",
     "rawNames": [
       "Shortland Public"
-    ]
-  },
-  {
-    "slug": "st-augustine-s-anglican",
-    "displayName": "St Augustine's Anglican",
-    "rawNames": [
-      "St Augustine's Anglican"
     ]
   },
   {
@@ -340,13 +326,6 @@
     "displayName": "Absent (Newcastle)",
     "rawNames": [
       "Absent (Newcastle)"
-    ]
-  },
-  {
-    "slug": "new-lambton-uniting-grinsell-st",
-    "displayName": "New Lambton Uniting -Grinsell St",
-    "rawNames": [
-      "New Lambton Uniting -Grinsell St"
     ]
   },
   {
@@ -1152,9 +1131,11 @@
   },
   {
     "slug": "kotara-south-newcastle",
-    "displayName": "Kotara South (Newcastle)",
+    "displayName": "Kotara South",
     "rawNames": [
-      "Kotara South (Newcastle)"
+      "Kotara South (Newcastle)",
+      "Kotara South (Shortland)",
+      "Kotara Sth Public"
     ]
   },
   {
@@ -1191,7 +1172,8 @@
     "slug": "merewether-south",
     "displayName": "Merewether South",
     "rawNames": [
-      "Merewether South"
+      "Merewether South",
+      "St Augustine's Anglican"
     ]
   },
   {
@@ -1468,7 +1450,8 @@
     "slug": "kotara-east",
     "displayName": "Kotara East",
     "rawNames": [
-      "Kotara East"
+      "Kotara East",
+      "New Lambton Uniting -Grinsell St"
     ]
   },
   {
@@ -1643,13 +1626,6 @@
     "rawNames": [
       "Kahibah",
       "Kahibah Public"
-    ]
-  },
-  {
-    "slug": "kotara-south-shortland",
-    "displayName": "Kotara South (Shortland)",
-    "rawNames": [
-      "Kotara South (Shortland)"
     ]
   },
   {
