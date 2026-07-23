@@ -43250,6 +43250,7 @@
     "lga": "City of Newcastle",
     "lat": -32.9272,
     "lng": 151.7761,
+    "type": "pre-poll",
     "results": [
       {
         "electionId": "2016-federal",
