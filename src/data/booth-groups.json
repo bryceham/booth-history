@@ -1,26 +1,5 @@
 [
   {
-    "slug": "callaghan-cllg-jesmond-snr",
-    "displayName": "Callaghan Cllg - Jesmond Snr",
-    "rawNames": [
-      "Callaghan Cllg - Jesmond Snr"
-    ]
-  },
-  {
-    "slug": "callaghan-cllg-wallsend",
-    "displayName": "Callaghan Cllg - Wallsend",
-    "rawNames": [
-      "Callaghan Cllg - Wallsend"
-    ]
-  },
-  {
-    "slug": "callaghan-cllg-waratah-tech",
-    "displayName": "Callaghan Cllg - Waratah Tech",
-    "rawNames": [
-      "Callaghan Cllg - Waratah Tech"
-    ]
-  },
-  {
     "slug": "elermore-vale-public",
     "displayName": "Elermore Vale Public",
     "rawNames": [
@@ -63,13 +42,6 @@
     ]
   },
   {
-    "slug": "merewether-hghts-public",
-    "displayName": "Merewether Hghts Public",
-    "rawNames": [
-      "Merewether Hghts Public"
-    ]
-  },
-  {
     "slug": "merewether-uniting",
     "displayName": "Merewether Uniting",
     "rawNames": [
@@ -81,20 +53,6 @@
     "displayName": "Minmi Hall",
     "rawNames": [
       "Minmi Hall"
-    ]
-  },
-  {
-    "slug": "new-lambton-comm-cntr",
-    "displayName": "New Lambton Comm Cntr",
-    "rawNames": [
-      "New Lambton Comm Cntr"
-    ]
-  },
-  {
-    "slug": "new-lambton-sth-public",
-    "displayName": "New Lambton Sth Public",
-    "rawNames": [
-      "New Lambton Sth Public"
     ]
   },
   {
@@ -123,20 +81,6 @@
     "displayName": "St Patricks Wallsend",
     "rawNames": [
       "St Patricks Wallsend"
-    ]
-  },
-  {
-    "slug": "st-thereses-new-lambton",
-    "displayName": "St Thereses New Lambton",
-    "rawNames": [
-      "St Thereses New Lambton"
-    ]
-  },
-  {
-    "slug": "tarro-hall",
-    "displayName": "Tarro Hall",
-    "rawNames": [
-      "Tarro Hall"
     ]
   },
   {
@@ -207,13 +151,6 @@
     "displayName": "Postal (Newcastle)",
     "rawNames": [
       "Postal (Newcastle)"
-    ]
-  },
-  {
-    "slug": "all-saints-new-lambton",
-    "displayName": "All Saints New Lambton",
-    "rawNames": [
-      "All Saints New Lambton"
     ]
   },
   {
@@ -343,13 +280,6 @@
     ]
   },
   {
-    "slug": "waratah-w-public",
-    "displayName": "Waratah W Public",
-    "rawNames": [
-      "Waratah W Public"
-    ]
-  },
-  {
     "slug": "fletcher-evc",
     "displayName": "Fletcher EVC",
     "rawNames": [
@@ -396,13 +326,6 @@
     "displayName": "Postal (Wallsend)",
     "rawNames": [
       "Postal (Wallsend)"
-    ]
-  },
-  {
-    "slug": "fern-bay-hall",
-    "displayName": "Fern Bay Hall",
-    "rawNames": [
-      "Fern Bay Hall"
     ]
   },
   {
@@ -466,13 +389,6 @@
     "displayName": "Holy Family Merewether",
     "rawNames": [
       "Holy Family Merewether"
-    ]
-  },
-  {
-    "slug": "st-matthews-anglican-georgetown",
-    "displayName": "St Matthews Anglican Georgetown",
-    "rawNames": [
-      "St Matthews Anglican Georgetown"
     ]
   },
   {
@@ -1015,13 +931,6 @@
     ]
   },
   {
-    "slug": "hmc-waratah",
-    "displayName": "HMC Waratah",
-    "rawNames": [
-      "HMC Waratah"
-    ]
-  },
-  {
     "slug": "merewether-pre-poll",
     "displayName": "Merewether Pre-Poll",
     "rawNames": [
@@ -1054,13 +963,6 @@
     "displayName": "iVote",
     "rawNames": [
       "iVote"
-    ]
-  },
-  {
-    "slug": "jesmond-public",
-    "displayName": "Jesmond Public",
-    "rawNames": [
-      "Jesmond Public"
     ]
   },
   {
@@ -1109,7 +1011,10 @@
     "slug": "georgetown",
     "displayName": "Georgetown",
     "rawNames": [
-      "Georgetown"
+      "Georgetown",
+      "Callaghan Cllg - Waratah Tech",
+      "St Matthews Anglican Georgetown",
+      "HMC Waratah"
     ]
   },
   {
@@ -1148,7 +1053,8 @@
     "displayName": "Wallsend East",
     "rawNames": [
       "Wallsend East",
-      "Jesmond Nhood Cntr"
+      "Jesmond Nhood Cntr",
+      "Jesmond Public"
     ]
   },
   {
@@ -1203,7 +1109,8 @@
     "slug": "waratah-west",
     "displayName": "Waratah West",
     "rawNames": [
-      "Waratah West"
+      "Waratah West",
+      "Waratah W Public"
     ]
   },
   {
@@ -1299,7 +1206,8 @@
     "slug": "merewether-heights",
     "displayName": "Merewether Heights",
     "rawNames": [
-      "Merewether Heights"
+      "Merewether Heights",
+      "Merewether Hghts Public"
     ]
   },
   {
@@ -1313,14 +1221,16 @@
     "slug": "jesmond-north",
     "displayName": "Jesmond North",
     "rawNames": [
-      "Jesmond North"
+      "Jesmond North",
+      "Callaghan Cllg - Jesmond Snr"
     ]
   },
   {
     "slug": "plattsburg",
     "displayName": "Plattsburg",
     "rawNames": [
-      "Plattsburg"
+      "Plattsburg",
+      "Callaghan Cllg - Wallsend"
     ]
   },
   {
@@ -1359,7 +1269,9 @@
     "slug": "new-lambton-central",
     "displayName": "New Lambton Central",
     "rawNames": [
-      "New Lambton Central"
+      "New Lambton Central",
+      "All Saints New Lambton",
+      "New Lambton Comm Cntr"
     ]
   },
   {
@@ -1397,7 +1309,8 @@
     "slug": "new-lambton-south",
     "displayName": "New Lambton South",
     "rawNames": [
-      "New Lambton South"
+      "New Lambton South",
+      "New Lambton Sth Public"
     ]
   },
   {
@@ -1428,7 +1341,8 @@
     "slug": "new-lambton",
     "displayName": "New Lambton",
     "rawNames": [
-      "New Lambton"
+      "New Lambton",
+      "St Thereses New Lambton"
     ]
   },
   {
@@ -1546,7 +1460,8 @@
     "slug": "fern-bay",
     "displayName": "Fern Bay",
     "rawNames": [
-      "Fern Bay"
+      "Fern Bay",
+      "Fern Bay Hall"
     ]
   },
   {
@@ -1609,7 +1524,8 @@
     "slug": "tarro",
     "displayName": "Tarro",
     "rawNames": [
-      "Tarro"
+      "Tarro",
+      "Tarro Hall"
     ]
   },
   {

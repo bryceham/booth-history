@@ -25452,6 +25452,7 @@
     "lga": "Lake Macquarie City Council",
     "lat": -32.9272,
     "lng": 151.7761,
+    "type": "other-dec",
     "results": [
       {
         "electionId": "2019-state",
@@ -35447,6 +35448,7 @@
     "lga": "City of Newcastle",
     "lat": -32.9272,
     "lng": 151.7761,
+    "type": "other-dec",
     "results": [
       {
         "electionId": "2021-lake-macquarie-local",
@@ -45170,6 +45172,7 @@
     "lga": "City of Newcastle",
     "lat": -32.9272,
     "lng": 151.7761,
+    "type": "other-dec",
     "results": [
       {
         "electionId": "2013-federal",
@@ -51914,6 +51917,7 @@
     "lga": "Lake Macquarie City Council",
     "lat": -32.9272,
     "lng": 151.7761,
+    "type": "other-dec",
     "results": [
       {
         "electionId": "2013-federal",
